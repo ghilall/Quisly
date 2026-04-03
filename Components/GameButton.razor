@@ -1,0 +1,17 @@
+@namespace Quisly.Components
+
+<button class="game-btn game-btn-@Color @(IsSelected ? "selected" : "") @(IsDisabled ? "disabled" : "")"
+        @onclick="OnClick"
+        disabled="@IsDisabled">
+    <span class="game-btn-icon">@Icon</span>
+    <span class="game-btn-text">@Text</span>
+</button>
+
+@code {
+    [Parameter] public string Text { get; set; } = "";
+    [Parameter] public string Color { get; set; } = "red";
+    [Parameter] public string Icon { get; set; } = "▲";
+    [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public bool IsDisabled { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+}

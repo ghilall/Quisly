@@ -1,0 +1,25 @@
+<CascadingAuthenticationState>
+    <Router AppAssembly="typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)">
+                <NotAuthorized>
+                    <Quisly.Pages.Auth.Login />
+                </NotAuthorized>
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>Not Found - Quisly</PageTitle>
+            <LayoutView Layout="typeof(Layout.MainLayout)">
+                <div class="auth-page">
+                    <div class="auth-card" style="text-align:center">
+                        <h1 class="brand-title">Quisly</h1>
+                        <h2 style="margin:1rem 0">Page Not Found</h2>
+                        <p style="color:var(--color-text-muted);margin-bottom:1.5rem">The page you're looking for doesn't exist.</p>
+                        <a href="/" class="btn-primary" style="display:inline-flex;width:auto">Go Home</a>
+                    </div>
+                </div>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

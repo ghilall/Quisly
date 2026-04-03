@@ -1,0 +1,15 @@
+@namespace Quisly.Components
+
+<div class="pin-display">
+    <span class="pin-label">Game PIN</span>
+    <div class="pin-digits">
+        @foreach (var digit in Pin)
+        {
+            <span class="pin-digit">@digit</span>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Pin { get; set; } = "";
+}

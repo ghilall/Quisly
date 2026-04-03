@@ -1,0 +1,146 @@
+@page "/create-quiz"
+@using Quisly.Services
+@using Quisly.Models
+@inject GameService Game
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="create-quiz-page">
+    <h1 class="page-title">Create a Quiz</h1>
+
+    @if (!string.IsNullOrEmpty(_error))
+    {
+        <div class="error-banner">@_error</div>
+    }
+
+    <div class="form-group">
+        <label>Quiz Title</label>
+        <input type="text" @bind="_title" placeholder="My Awesome Quiz" class="form-input" />
+    </div>
+    <div class="form-group">
+        <label>Description (optional)</label>
+        <input type="text" @bind="_description" placeholder="A quiz about..." class="form-input" />
+    </div>
+
+    <h2 class="section-title">Questions</h2>
+
+    @for (int i = 0; i < _questions.Count; i++)
+    {
+        var index = i;
+        <div class="question-editor">
+            <div class="question-header">
+                <h3>Question @(index + 1)</h3>
+                @if (_questions.Count > 1)
+                {
+                    <button class="btn-ghost btn-danger" @onclick="() => RemoveQuestion(index)">Remove</button>
+                }
+            </div>
+
+            <div class="form-group">
+                <label>Question</label>
+                <input type="text" @bind="_questions[index].QuestionText" placeholder="What is...?" class="form-input" />
+            </div>
+
+            <div class="options-grid">
+                <div class="option-input option-a">
+                    <span class="option-marker">▲</span>
+                    <input type="text" @bind="_questions[index].OptionA" placeholder="Option A" class="form-input" />
+                </div>
+                <div class="option-input option-b">
+                    <span class="option-marker">◆</span>
+                    <input type="text" @bind="_questions[index].OptionB" placeholder="Option B" class="form-input" />
+                </div>
+                <div class="option-input option-c">
+                    <span class="option-marker">●</span>
+                    <input type="text" @bind="_questions[index].OptionC" placeholder="Option C" class="form-input" />
+                </div>
+                <div class="option-input option-d">
+                    <span class="option-marker">■</span>
+                    <input type="text" @bind="_questions[index].OptionD" placeholder="Option D" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Correct Answer</label>
+                    <select @bind="_questions[index].CorrectOption" class="form-input">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Time Limit (seconds)</label>
+                    <input type="number" @bind="_questions[index].TimeLimitSeconds" min="5" max="60" class="form-input" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <button class="btn-secondary" @onclick="AddQuestion">+ Add Question</button>
+
+    <div class="create-actions">
+        <button class="btn-primary btn-large" @onclick="HandleCreate" disabled="@_loading">
+            @(_loading ? "Creating..." : "Create Quiz")
+        </button>
+    </div>
+</div>
+
+@code {
+    private string _title = "";
+    private string? _description;
+    private string _error = "";
+    private bool _loading;
+    private List<Question> _questions = new() { new Question() };
+
+    private void AddQuestion()
+    {
+        _questions.Add(new Question());
+    }
+
+    private void RemoveQuestion(int index)
+    {
+        if (_questions.Count > 1)
+            _questions.RemoveAt(index);
+    }
+
+    private async Task HandleCreate()
+    {
+        _error = "";
+        _loading = true;
+
+        try
+        {
+            if (string.IsNullOrWhiteSpace(_title))
+            {
+                _error = "Please enter a quiz title.";
+                return;
+            }
+
+            foreach (var q in _questions)
+            {
+                if (string.IsNullOrWhiteSpace(q.QuestionText) ||
+                    string.IsNullOrWhiteSpace(q.OptionA) ||
+                    string.IsNullOrWhiteSpace(q.OptionB) ||
+                    string.IsNullOrWhiteSpace(q.OptionC) ||
+                    string.IsNullOrWhiteSpace(q.OptionD))
+                {
+                    _error = "Please fill in all question fields.";
+                    return;
+                }
+            }
+
+            var quiz = await Game.CreateQuiz(_title, _description, _questions);
+            Nav.NavigateTo("/host");
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

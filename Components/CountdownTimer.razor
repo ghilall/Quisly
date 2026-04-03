@@ -1,0 +1,55 @@
+@namespace Quisly.Components
+@implements IDisposable
+
+<div class="countdown-ring">
+    <svg viewBox="0 0 120 120">
+        <circle class="countdown-track" cx="60" cy="60" r="52" />
+        <circle class="countdown-fill @UrgencyClass"
+                cx="60" cy="60" r="52"
+                stroke-dasharray="@Circumference"
+                stroke-dashoffset="@DashOffset" />
+    </svg>
+    <span class="countdown-number @UrgencyClass">@SecondsLeft</span>
+</div>
+
+@code {
+    [Parameter] public int TotalSeconds { get; set; } = 20;
+    [Parameter] public EventCallback OnTimeUp { get; set; }
+    [Parameter] public EventCallback<int> OnTick { get; set; }
+
+    private System.Threading.Timer? _timer;
+    private int SecondsLeft { get; set; }
+    private const double Circumference = 2 * Math.PI * 52;
+    private double DashOffset => Circumference * (1 - (double)SecondsLeft / TotalSeconds);
+
+    private string UrgencyClass => SecondsLeft switch
+    {
+        <= 3 => "critical",
+        <= 7 => "warning",
+        _ => ""
+    };
+
+    protected override void OnInitialized()
+    {
+        SecondsLeft = TotalSeconds;
+        _timer = new System.Threading.Timer(async _ =>
+        {
+            SecondsLeft--;
+            await InvokeAsync(async () =>
+            {
+                await OnTick.InvokeAsync(SecondsLeft);
+                if (SecondsLeft <= 0)
+                {
+                    _timer?.Dispose();
+                    await OnTimeUp.InvokeAsync();
+                }
+                StateHasChanged();
+            });
+        }, null, 1000, 1000);
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+}

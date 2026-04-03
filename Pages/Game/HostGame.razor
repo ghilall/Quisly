@@ -1,0 +1,194 @@
+@page "/host-game/{SessionId}"
+@using Quisly.Services
+@using Quisly.Models
+@using Quisly.Components
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
+@inject GameService Game
+@inject RealtimeService Realtime
+@inject NavigationManager Nav
+
+<div class="host-game-page">
+    @if (_currentQuestion != null)
+    {
+        @switch (_phase)
+        {
+            case GamePhase.ShowingQuestion:
+                <div class="question-display">
+                    <div class="question-header-bar">
+                        <span class="question-counter">@(_currentIndex + 1) / @_questions.Count</span>
+                        <CountdownTimer TotalSeconds="@_currentQuestion.TimeLimitSeconds"
+                                        OnTimeUp="HandleTimeUp" />
+                    </div>
+                    <h2 class="question-text">@_currentQuestion.QuestionText</h2>
+                    <div class="answer-grid">
+                        <GameButton Text="@_currentQuestion.OptionA" Color="red" Icon="▲" />
+                        <GameButton Text="@_currentQuestion.OptionB" Color="blue" Icon="◆" />
+                        <GameButton Text="@_currentQuestion.OptionC" Color="yellow" Icon="●" />
+                        <GameButton Text="@_currentQuestion.OptionD" Color="green" Icon="■" />
+                    </div>
+                    <div class="answer-count">
+                        <span>@_answeredCount / @_players.Count answered</span>
+                    </div>
+                </div>
+                break;
+
+            case GamePhase.ShowingResults:
+                <div class="results-display">
+                    <h2>Results</h2>
+                    <div class="answer-bars">
+                        <div class="answer-bar bar-red">
+                            <span class="bar-label">▲ @_currentQuestion.OptionA</span>
+                            <div class="bar-fill" style="width: @GetAnswerPercentage("A")%">
+                                @if (_currentQuestion.CorrectOption == "A") { <span class="correct-mark">✓</span> }
+                            </div>
+                        </div>
+                        <div class="answer-bar bar-blue">
+                            <span class="bar-label">◆ @_currentQuestion.OptionB</span>
+                            <div class="bar-fill" style="width: @GetAnswerPercentage("B")%">
+                                @if (_currentQuestion.CorrectOption == "B") { <span class="correct-mark">✓</span> }
+                            </div>
+                        </div>
+                        <div class="answer-bar bar-yellow">
+                            <span class="bar-label">● @_currentQuestion.OptionC</span>
+                            <div class="bar-fill" style="width: @GetAnswerPercentage("C")%">
+                                @if (_currentQuestion.CorrectOption == "C") { <span class="correct-mark">✓</span> }
+                            </div>
+                        </div>
+                        <div class="answer-bar bar-green">
+                            <span class="bar-label">■ @_currentQuestion.OptionD</span>
+                            <div class="bar-fill" style="width: @GetAnswerPercentage("D")%">
+                                @if (_currentQuestion.CorrectOption == "D") { <span class="correct-mark">✓</span> }
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-primary btn-large" @onclick="ShowLeaderboard">Show Leaderboard</button>
+                </div>
+                break;
+
+            case GamePhase.Leaderboard:
+                <div class="leaderboard-phase">
+                    <Leaderboard Players="_players" />
+                    @if (_currentIndex < _questions.Count - 1)
+                    {
+                        <button class="btn-primary btn-large" @onclick="NextQuestion">Next Question</button>
+                    }
+                    else
+                    {
+                        <button class="btn-primary btn-large" @onclick="ShowFinalResults">Show Final Results</button>
+                    }
+                </div>
+                break;
+        }
+    }
+
+    @if (_phase == GamePhase.FinalResults)
+    {
+        <div class="final-results">
+            <h1 class="final-title">Game Over!</h1>
+            <Podium Players="_players" />
+            <Leaderboard Players="_players" />
+            <button class="btn-primary btn-large" @onclick='() => Nav.NavigateTo("/")'>Back to Home</button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string SessionId { get; set; } = "";
+
+    private List<Question> _questions = new();
+    private List<Player> _players = new();
+    private Question? _currentQuestion;
+    private int _currentIndex;
+    private int _answeredCount;
+    private GamePhase _phase = GamePhase.ShowingQuestion;
+    private DotNetObjectReference<HostGame>? _selfRef;
+
+    private enum GamePhase { ShowingQuestion, ShowingResults, Leaderboard, FinalResults }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _selfRef = DotNetObjectReference.Create(this);
+        _players = await Game.GetSessionPlayers(SessionId);
+        await Realtime.SubscribeToPlayers(SessionId, _selfRef);
+    }
+
+    [JSInvokable]
+    public async Task OnPlayersChanged()
+    {
+        await InvokeAsync(async () =>
+        {
+            _players = await Game.GetSessionPlayers(SessionId);
+            _answeredCount = _players.Count(p => p.LastAnswer != null);
+            StateHasChanged();
+        });
+    }
+
+    private async Task HandleTimeUp()
+    {
+        await ScoreCurrentQuestion();
+        _phase = GamePhase.ShowingResults;
+        StateHasChanged();
+    }
+
+    private async Task ScoreCurrentQuestion()
+    {
+        if (_currentQuestion == null) return;
+
+        foreach (var player in _players)
+        {
+            bool correct = player.LastAnswer == _currentQuestion.CorrectOption;
+            int score = Game.CalculateScore(
+                player.LastAnswer ?? "",
+                _currentQuestion.CorrectOption,
+                player.LastAnswerTimeMs ?? _currentQuestion.TimeLimitSeconds * 1000,
+                _currentQuestion.TimeLimitSeconds,
+                _currentQuestion.Points,
+                player.CurrentStreak);
+
+            await Game.UpdatePlayerScore(player.Id, score, correct);
+        }
+
+        _players = await Game.GetSessionPlayers(SessionId);
+    }
+
+    private void ShowLeaderboard()
+    {
+        _phase = GamePhase.Leaderboard;
+    }
+
+    private async Task NextQuestion()
+    {
+        _currentIndex++;
+        _currentQuestion = _questions[_currentIndex];
+        _answeredCount = 0;
+        _phase = GamePhase.ShowingQuestion;
+
+        foreach (var player in _players)
+        {
+            player.LastAnswer = null;
+            player.LastAnswerTimeMs = null;
+        }
+
+        await Game.UpdateSessionStatus(SessionId, SessionStatus.ShowingQuestion, _currentIndex);
+    }
+
+    private async Task ShowFinalResults()
+    {
+        _phase = GamePhase.FinalResults;
+        await Game.UpdateSessionStatus(SessionId, SessionStatus.Finished);
+    }
+
+    private int GetAnswerPercentage(string option)
+    {
+        if (_players.Count == 0) return 0;
+        int count = _players.Count(p => p.LastAnswer == option);
+        return (int)((double)count / _players.Count * 100);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await Realtime.UnsubscribeAll();
+        _selfRef?.Dispose();
+    }
+}

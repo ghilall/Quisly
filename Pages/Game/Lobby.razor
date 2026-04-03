@@ -1,0 +1,88 @@
+@page "/lobby/{SessionId}"
+@using Quisly.Services
+@using Quisly.Models
+@using Quisly.Components
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
+@inject GameService Game
+@inject RealtimeService Realtime
+@inject NavigationManager Nav
+
+<div class="lobby-page">
+    <div class="lobby-header">
+        <h1 class="brand-title">Quisly</h1>
+        <p class="lobby-subtitle">Waiting for players to join...</p>
+    </div>
+
+    <div class="lobby-content">
+        <div class="lobby-join-info">
+            <PinDisplay Pin="@_pin" />
+            <QRCodeDisplay JoinUrl="@JoinUrl" />
+            <p class="join-url">@JoinUrl</p>
+        </div>
+
+        <div class="lobby-players">
+            <h2>Players (@_players.Count)</h2>
+            <div class="player-grid">
+                @foreach (var player in _players)
+                {
+                    <div class="player-bubble animate-pop">
+                        <span class="player-avatar">😎</span>
+                        <span class="player-name">@player.Nickname</span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="lobby-actions">
+        <button class="btn-primary btn-large"
+                @onclick="StartGame"
+                disabled="@(_players.Count == 0)">
+            Start Game (@_players.Count players)
+        </button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string SessionId { get; set; } = "";
+
+    private string _pin = "";
+    private List<Player> _players = new();
+    private DotNetObjectReference<Lobby>? _selfRef;
+    private string JoinUrl => $"{Nav.BaseUri}join/{_pin}";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _selfRef = DotNetObjectReference.Create(this);
+        await LoadPlayers();
+        await Realtime.SubscribeToPlayers(SessionId, _selfRef);
+    }
+
+    [JSInvokable]
+    public async Task OnPlayersChanged()
+    {
+        await InvokeAsync(async () =>
+        {
+            await LoadPlayers();
+            StateHasChanged();
+        });
+    }
+
+    private async Task LoadPlayers()
+    {
+        _players = await Game.GetSessionPlayers(SessionId);
+    }
+
+    private async Task StartGame()
+    {
+        await Game.UpdateSessionStatus(SessionId, SessionStatus.ShowingQuestion, 0);
+        Nav.NavigateTo($"/host-game/{SessionId}");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await Realtime.UnsubscribeAll();
+        _selfRef?.Dispose();
+    }
+}

@@ -1,0 +1,72 @@
+@page "/register"
+@using Quisly.Services
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="auth-page">
+    <div class="auth-card">
+        <h1 class="brand-title">Quisly</h1>
+        <p class="auth-subtitle">Create your account</p>
+
+        @if (!string.IsNullOrEmpty(_error))
+        {
+            <div class="error-banner">@_error</div>
+        }
+
+        <div class="auth-form">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" @bind="_username" placeholder="CoolQuizzer42" class="form-input" />
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" @bind="_email" placeholder="your@email.com" class="form-input" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" @bind="_password" placeholder="Min. 6 characters" class="form-input" />
+            </div>
+            <button class="btn-primary" @onclick="HandleRegister" disabled="@_loading">
+                @(_loading ? "Creating account..." : "Create Account")
+            </button>
+        </div>
+
+        <p class="auth-switch">
+            Already have an account? <a href="/login">Sign in</a>
+        </p>
+    </div>
+</div>
+
+@code {
+    private string _username = "";
+    private string _email = "";
+    private string _password = "";
+    private string _error = "";
+    private bool _loading;
+
+    private async Task HandleRegister()
+    {
+        _error = "";
+        _loading = true;
+
+        try
+        {
+            if (string.IsNullOrWhiteSpace(_username) || _username.Length < 3)
+            {
+                _error = "Username must be at least 3 characters.";
+                return;
+            }
+
+            await Auth.SignUp(_email, _password, _username);
+            Nav.NavigateTo("/login?confirm=1");
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

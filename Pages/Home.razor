@@ -1,0 +1,74 @@
+@page "/"
+@using Quisly.Services
+@using Quisly.Models
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="home-page">
+    <header class="home-header">
+        <h1 class="brand-title">Quisly</h1>
+        @if (Auth.IsAuthenticated)
+        {
+            <div class="user-badge">
+                <span class="user-name">@(_profile?.DisplayName ?? "Player")</span>
+                @if (_profile?.AccountType == "Premium")
+                {
+                    <span class="premium-badge">★ PREMIUM</span>
+                }
+                <button class="btn-ghost" @onclick="HandleSignOut">Sign Out</button>
+            </div>
+        }
+    </header>
+
+    <main class="home-main">
+        @if (!Auth.IsAuthenticated)
+        {
+            <div class="hero-section">
+                <h2>The Ultimate Quiz Experience</h2>
+                <p>Host live quizzes, challenge friends, and climb the leaderboard!</p>
+                <div class="hero-actions">
+                    <button class="btn-primary btn-large" @onclick='() => Nav.NavigateTo("/login")'>Sign In</button>
+                    <button class="btn-secondary btn-large" @onclick='() => Nav.NavigateTo("/register")'>Create Account</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="action-cards">
+                <div class="action-card host-card" @onclick='() => Nav.NavigateTo("/host")'>
+                    <div class="card-icon">🎮</div>
+                    <h3>Host a Game</h3>
+                    <p>Create a session and invite players</p>
+                </div>
+                <div class="action-card join-card" @onclick='() => Nav.NavigateTo("/join")'>
+                    <div class="card-icon">🎯</div>
+                    <h3>Join a Game</h3>
+                    <p>Enter a PIN or scan a QR code</p>
+                </div>
+                <div class="action-card create-card" @onclick='() => Nav.NavigateTo("/create-quiz")'>
+                    <div class="card-icon">✏️</div>
+                    <h3>Create Quiz</h3>
+                    <p>Build your own quiz questions</p>
+                </div>
+            </div>
+        }
+    </main>
+</div>
+
+@code {
+    private Profile? _profile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Auth.IsAuthenticated)
+        {
+            _profile = await Auth.GetCurrentProfile();
+        }
+    }
+
+    private async Task HandleSignOut()
+    {
+        await Auth.SignOut();
+        Nav.NavigateTo("/", forceLoad: true);
+    }
+}

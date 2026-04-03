@@ -1,0 +1,36 @@
+@namespace Quisly.Components
+@using Quisly.Models
+
+<div class="leaderboard">
+    <h2 class="leaderboard-title">Leaderboard</h2>
+    <div class="leaderboard-list">
+        @for (int i = 0; i < Math.Min(Players.Count, 5); i++)
+        {
+            var player = Players[i];
+            var rank = i + 1;
+            <div class="leaderboard-row @(rank <= 3 ? $"top-{rank}" : "")">
+                <span class="leaderboard-rank">@RankEmoji(rank)</span>
+                <span class="leaderboard-name">@player.Nickname</span>
+                <span class="leaderboard-streak" title="Streak">
+                    @if (player.CurrentStreak > 0)
+                    {
+                        <span>🔥 @player.CurrentStreak</span>
+                    }
+                </span>
+                <span class="leaderboard-score">@player.Score.ToString("N0")</span>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public List<Player> Players { get; set; } = new();
+
+    private static string RankEmoji(int rank) => rank switch
+    {
+        1 => "🥇",
+        2 => "🥈",
+        3 => "🥉",
+        _ => $"#{rank}"
+    };
+}

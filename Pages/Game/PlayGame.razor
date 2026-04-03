@@ -1,0 +1,163 @@
+@page "/play/{SessionId}/{PlayerId}"
+@using Quisly.Services
+@using Quisly.Models
+@using Quisly.Components
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
+@inject GameService Game
+@inject RealtimeService Realtime
+@inject NavigationManager Nav
+
+<div class="play-game-page">
+    @switch (_phase)
+    {
+        case PlayerPhase.Waiting:
+            <div class="waiting-phase">
+                <div class="spinner"></div>
+                <h2>Get Ready!</h2>
+                <p>Waiting for the next question...</p>
+            </div>
+            break;
+
+        case PlayerPhase.Answering:
+            <div class="answering-phase">
+                <div class="timer-bar">
+                    <CountdownTimer TotalSeconds="@_timeLimit" OnTimeUp="HandleTimeUp" />
+                </div>
+                <h2 class="player-question-text">@_questionText</h2>
+                <div class="answer-grid">
+                    <GameButton Text="@_optionA" Color="red" Icon="▲"
+                                IsSelected="@(_selectedAnswer == "A")"
+                                IsDisabled="@_answered"
+                                OnClick="@(() => SelectAnswer("A"))" />
+                    <GameButton Text="@_optionB" Color="blue" Icon="◆"
+                                IsSelected="@(_selectedAnswer == "B")"
+                                IsDisabled="@_answered"
+                                OnClick="@(() => SelectAnswer("B"))" />
+                    <GameButton Text="@_optionC" Color="yellow" Icon="●"
+                                IsSelected="@(_selectedAnswer == "C")"
+                                IsDisabled="@_answered"
+                                OnClick="@(() => SelectAnswer("C"))" />
+                    <GameButton Text="@_optionD" Color="green" Icon="■"
+                                IsSelected="@(_selectedAnswer == "D")"
+                                IsDisabled="@_answered"
+                                OnClick="@(() => SelectAnswer("D"))" />
+                </div>
+            </div>
+            break;
+
+        case PlayerPhase.Answered:
+            <div class="answered-phase">
+                <div class="answer-sent">
+                    <span class="big-check">✓</span>
+                    <h2>Answer submitted!</h2>
+                    <p>Waiting for results...</p>
+                </div>
+            </div>
+            break;
+
+        case PlayerPhase.Result:
+            <div class="result-phase @(_wasCorrect ? "correct" : "incorrect")">
+                <span class="result-icon">@(_wasCorrect ? "✅" : "❌")</span>
+                <h2>@(_wasCorrect ? "Correct!" : "Wrong!")</h2>
+                @if (_wasCorrect)
+                {
+                    <p class="score-gained">+@_pointsGained points</p>
+                    <p class="streak-info">🔥 Streak: @_streak</p>
+                }
+                <p class="total-score">Total: @_totalScore points</p>
+            </div>
+            break;
+
+        case PlayerPhase.Finished:
+            <div class="finished-phase">
+                <h1>Game Over!</h1>
+                <p class="final-score-label">Your Final Score</p>
+                <p class="final-score-value">@_totalScore</p>
+                <p class="final-rank">Rank: #@_rank</p>
+                <button class="btn-primary btn-large" @onclick='() => Nav.NavigateTo("/")'>Back to Home</button>
+            </div>
+            break;
+    }
+</div>
+
+@code {
+    [Parameter] public string SessionId { get; set; } = "";
+    [Parameter] public string PlayerId { get; set; } = "";
+
+    private PlayerPhase _phase = PlayerPhase.Waiting;
+    private string _questionText = "";
+    private string _optionA = "", _optionB = "", _optionC = "", _optionD = "";
+    private string? _selectedAnswer;
+    private bool _answered;
+    private bool _wasCorrect = false;
+    private int _pointsGained = 0;
+    private int _streak = 0;
+    private int _totalScore = 0;
+    private int _rank = 0;
+    private int _timeLimit = 20;
+    private DateTime _questionStartTime;
+    private DotNetObjectReference<PlayGame>? _selfRef;
+
+    private enum PlayerPhase { Waiting, Answering, Answered, Result, Finished }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _selfRef = DotNetObjectReference.Create(this);
+        await Realtime.SubscribeToSession(SessionId, _selfRef);
+    }
+
+    [JSInvokable]
+    public async Task OnSessionStatusChanged(string status)
+    {
+        await InvokeAsync(() =>
+        {
+            switch (status)
+            {
+                case SessionStatus.ShowingQuestion:
+                    _phase = PlayerPhase.Answering;
+                    _answered = false;
+                    _selectedAnswer = null;
+                    _questionStartTime = DateTime.UtcNow;
+                    break;
+                case SessionStatus.ShowingResults:
+                    if (!_answered) _phase = PlayerPhase.Answered;
+                    break;
+                case SessionStatus.Leaderboard:
+                    _phase = PlayerPhase.Result;
+                    break;
+                case SessionStatus.Finished:
+                    _phase = PlayerPhase.Finished;
+                    break;
+            }
+            StateHasChanged();
+        });
+    }
+
+    private async Task SelectAnswer(string answer)
+    {
+        if (_answered) return;
+
+        _selectedAnswer = answer;
+        _answered = true;
+        _phase = PlayerPhase.Answered;
+
+        var elapsed = (int)(DateTime.UtcNow - _questionStartTime).TotalMilliseconds;
+        await Game.SubmitAnswer(PlayerId, SessionId, answer, elapsed);
+    }
+
+    private void HandleTimeUp()
+    {
+        if (!_answered)
+        {
+            _answered = true;
+            _phase = PlayerPhase.Answered;
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await Realtime.UnsubscribeAll();
+        _selfRef?.Dispose();
+    }
+}

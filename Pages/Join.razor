@@ -1,0 +1,107 @@
+@page "/join"
+@page "/join/{PinParam}"
+@using Quisly.Services
+@inject GameService Game
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="join-page">
+    <div class="join-card">
+        <h1 class="brand-title">Quisly</h1>
+        <h2>Join a Game</h2>
+
+        @if (!string.IsNullOrEmpty(_error))
+        {
+            <div class="error-banner">@_error</div>
+        }
+
+        @if (!_joined)
+        {
+            <div class="pin-input-section">
+                <label>Game PIN</label>
+                <div class="pin-input-group">
+                    <input type="text" @bind="_pin" maxlength="6" placeholder="000000"
+                           class="form-input pin-field" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Your Nickname</label>
+                <input type="text" @bind="_nickname" placeholder="Enter a fun nickname" class="form-input" />
+            </div>
+
+            <button class="btn-primary btn-large" @onclick="HandleJoin" disabled="@_loading">
+                @(_loading ? "Joining..." : "Join Game!")
+            </button>
+        }
+        else
+        {
+            <div class="waiting-screen">
+                <div class="spinner"></div>
+                <h3>You're in, @_nickname!</h3>
+                <p>Waiting for the host to start the game...</p>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? PinParam { get; set; }
+
+    private string _pin = "";
+    private string _nickname = "";
+    private string _error = "";
+    private bool _loading;
+    private bool _joined;
+    private string? _sessionId;
+    private string? _playerId;
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrEmpty(PinParam))
+            _pin = PinParam;
+    }
+
+    private async Task HandleJoin()
+    {
+        _error = "";
+        _loading = true;
+
+        try
+        {
+            if (_pin.Length != 6)
+            {
+                _error = "Please enter a 6-digit PIN.";
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_nickname))
+            {
+                _error = "Please enter a nickname.";
+                return;
+            }
+
+            var session = await Game.JoinByPin(_pin);
+            if (session == null)
+            {
+                _error = "No active game found with that PIN.";
+                return;
+            }
+
+            _sessionId = session.Id;
+            var player = await Game.AddPlayer(session.Id, _nickname);
+            _playerId = player.Id;
+            _joined = true;
+
+            Nav.NavigateTo($"/play/{_sessionId}/{_playerId}");
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}

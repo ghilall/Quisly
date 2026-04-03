@@ -1,0 +1,69 @@
+@page "/host"
+@using Quisly.Services
+@using Quisly.Models
+@inject GameService Game
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="host-page">
+    <h1 class="page-title">Host a Game</h1>
+
+    @if (!Auth.IsAuthenticated)
+    {
+        <div class="auth-required">
+            <p>You need to sign in to host a game.</p>
+            <button class="btn-primary" @onclick='() => Nav.NavigateTo("/login")'>Sign In</button>
+        </div>
+    }
+    else if (_quizzes == null)
+    {
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>Loading your quizzes...</p>
+        </div>
+    }
+    else if (_quizzes.Count == 0)
+    {
+        <div class="empty-state">
+            <div class="empty-icon">📝</div>
+            <h3>No quizzes yet!</h3>
+            <p>Create your first quiz to start hosting games.</p>
+            <button class="btn-primary" @onclick='() => Nav.NavigateTo("/create-quiz")'>Create Quiz</button>
+        </div>
+    }
+    else
+    {
+        <div class="quiz-grid">
+            @foreach (var quiz in _quizzes)
+            {
+                <div class="quiz-card" @onclick="() => StartGame(quiz.Id)">
+                    <h3>@quiz.Title</h3>
+                    <p class="quiz-meta">@quiz.QuestionCount questions</p>
+                    @if (!string.IsNullOrEmpty(quiz.Description))
+                    {
+                        <p class="quiz-desc">@quiz.Description</p>
+                    }
+                    <button class="btn-accent">Start Game</button>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<Quiz>? _quizzes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Auth.IsAuthenticated)
+        {
+            _quizzes = await Game.GetMyQuizzes();
+        }
+    }
+
+    private async Task StartGame(string quizId)
+    {
+        var session = await Game.CreateSession(quizId);
+        Nav.NavigateTo($"/lobby/{session.Id}");
+    }
+}

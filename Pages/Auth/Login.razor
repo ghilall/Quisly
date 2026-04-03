@@ -1,0 +1,88 @@
+@page "/login"
+@using Quisly.Services
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="auth-page">
+    <div class="auth-card">
+        <h1 class="brand-title">Quisly</h1>
+        <p class="auth-subtitle">Sign in to play!</p>
+
+        @if (!string.IsNullOrEmpty(_info))
+        {
+            <div class="info-banner">@_info</div>
+        }
+
+        @if (!string.IsNullOrEmpty(_error))
+        {
+            <div class="error-banner">@_error</div>
+        }
+
+        <div class="auth-form">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" @bind="_email" placeholder="your@email.com" class="form-input" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" @bind="_password" placeholder="••••••••" class="form-input" />
+            </div>
+            <button class="btn-primary" @onclick="HandleLogin" disabled="@_loading">
+                @(_loading ? "Signing in..." : "Sign In")
+            </button>
+        </div>
+
+        <p class="auth-switch">
+            Don't have an account? <a href="/register">Create one</a>
+        </p>
+    </div>
+</div>
+
+@code {
+    private string _email = "";
+    private string _password = "";
+    private string _error = "";
+    private string _info = "";
+    private bool _loading;
+
+    protected override void OnInitialized()
+    {
+        var uri = Nav.ToAbsoluteUri(Nav.Uri);
+        var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+        if (query.ContainsKey("confirm"))
+        {
+            _info = "Account created! Please check your mailbox and confirm your email before signing in.";
+        }
+    }
+
+    private async Task HandleLogin()
+    {
+        _error = "";
+        _loading = true;
+
+        try
+        {
+            await Auth.SignIn(_email, _password);
+            Nav.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            var msg = ex.Message;
+
+            if (msg.Contains("invalid_credentials", StringComparison.OrdinalIgnoreCase)
+                || msg.Contains("Invalid login credentials", StringComparison.OrdinalIgnoreCase)
+                || msg.Contains("400", StringComparison.OrdinalIgnoreCase))
+            {
+                _error = "Incorrect email or password. If you just registered, please confirm your email first.";
+            }
+            else
+            {
+                _error = msg;
+            }
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+}
