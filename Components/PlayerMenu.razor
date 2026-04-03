@@ -1,0 +1,129 @@
+@using Quisly.Models
+@using Quisly.Services
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<div class="player-menu-wrapper">
+    <button class="player-menu-trigger" @onclick="ToggleMenu">
+        <div class="player-avatar-sm">@_initial</div>
+        <span class="player-menu-name">@(_profile?.DisplayName ?? "Player")</span>
+        @if (_profile?.IsPremium == true)
+        {
+            <span class="premium-badge-icon" title="Premium Member">★</span>
+        }
+        <span class="dropdown-chevron @(_open ? "open" : "")">▾</span>
+    </button>
+
+    @if (_open)
+    {
+        <div class="player-dropdown" @onclick:stopPropagation>
+            <!-- Header -->
+            <div class="pd-header">
+                <div class="pd-avatar">@_initial</div>
+                <div class="pd-identity">
+                    <div class="pd-display-name">@(_profile?.DisplayName ?? "Player")</div>
+                    <div class="pd-username">@@@(_profile?.Username ?? "")</div>
+                </div>
+                @if (_profile?.IsPremium == true)
+                {
+                    <div class="pd-membership premium">★ PREMIUM</div>
+                }
+                else
+                {
+                    <div class="pd-membership free">FREE</div>
+                }
+            </div>
+
+            <!-- Level & XP -->
+            <div class="pd-xp-section">
+                <div class="pd-level-row">
+                    <span class="pd-level-label">Level @(_profile != null ? AuthService.GetLevel(_profile.Xp) : 1)</span>
+                    <span class="pd-xp-label">@(_profile?.Xp ?? 0) XP</span>
+                </div>
+                <div class="pd-xp-bar-track">
+                    <div class="pd-xp-bar-fill" style="width: @(_xpPercent)%"></div>
+                </div>
+                <div class="pd-xp-next">@(_xpToNext) XP to Level @(_nextLevel)</div>
+            </div>
+
+            <!-- Stats -->
+            <div class="pd-stats">
+                <div class="pd-stat">
+                    <span class="pd-stat-value">@(_profile?.TotalGamesPlayed ?? 0)</span>
+                    <span class="pd-stat-label">Games Played</span>
+                </div>
+                <div class="pd-stat">
+                    <span class="pd-stat-value">@(_profile?.TotalGamesWon ?? 0)</span>
+                    <span class="pd-stat-label">Wins</span>
+                </div>
+                <div class="pd-stat">
+                    <span class="pd-stat-value">@(_joinedDate)</span>
+                    <span class="pd-stat-label">Joined</span>
+                </div>
+            </div>
+
+            <!-- Upgrade CTA (free only) -->
+            @if (_profile?.IsPremium == false)
+            {
+                <div class="pd-upgrade-section">
+                    <button class="pd-upgrade-btn" @onclick="HandleUpgrade" disabled="@_upgrading">
+                        @if (_upgrading)
+                        {
+                            <span>Upgrading...</span>
+                        }
+                        else
+                        {
+                            <span>⚡ Upgrade to Premium — Only 2.99₺/mo</span>
+                        }
+                    </button>
+                    <p class="pd-upgrade-hint">Unlock hosting &amp; quiz creation</p>
+                </div>
+            }
+
+            <!-- Sign Out -->
+            <button class="pd-signout-btn" @onclick="HandleSignOut">Sign Out</button>
+        </div>
+
+        <div class="dropdown-backdrop" @onclick="CloseMenu"></div>
+    }
+</div>
+
+@code {
+    [Parameter] public Profile? Profile { get; set; }
+    [Parameter] public EventCallback OnProfileChanged { get; set; }
+
+    private bool _open;
+    private bool _upgrading;
+    private Profile? _profile => Profile;
+
+    private string _initial => (_profile?.DisplayName ?? "?").Substring(0, 1).ToUpper();
+    private int _xpPercent => _profile != null ? AuthService.LevelProgressPercent(_profile.Xp) : 0;
+    private int _xpToNext => _profile != null ? AuthService.XpToNextLevel(_profile.Xp) : 100;
+    private int _nextLevel => _profile != null ? AuthService.GetLevel(_profile.Xp) + 1 : 2;
+    private string _joinedDate => _profile?.CreatedAt.ToString("MMM yyyy") ?? "—";
+
+    private void ToggleMenu() => _open = !_open;
+    private void CloseMenu() => _open = false;
+
+    private async Task HandleUpgrade()
+    {
+        _upgrading = true;
+        try
+        {
+            await Auth.UpgradeToPremium();
+            await OnProfileChanged.InvokeAsync();
+        }
+        finally
+        {
+            _upgrading = false;
+            _open = false;
+        }
+    }
+
+    private async Task HandleSignOut()
+    {
+        _open = false;
+        await Auth.SignOut();
+        Nav.NavigateTo("/", forceLoad: true);
+    }
+}

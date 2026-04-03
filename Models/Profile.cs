@@ -28,6 +28,18 @@ public class Profile : BaseModel
     [Column("total_games_hosted")]
     public int TotalGamesHosted { get; set; }
 
+    [Column("total_games_won")]
+    public int TotalGamesWon { get; set; }
+
+    [Column("xp")]
+    public int Xp { get; set; }
+
+    [Column("level")]
+    public int Level { get; set; } = 1;
+
     [Column("created_at")]
     public DateTime CreatedAt { get; set; }
+
+    [Newtonsoft.Json.JsonIgnore]
+    public bool IsPremium => AccountType == "Premium";
 }

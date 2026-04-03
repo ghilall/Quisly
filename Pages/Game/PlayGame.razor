@@ -6,6 +6,7 @@
 @implements IAsyncDisposable
 @inject GameService Game
 @inject RealtimeService Realtime
+@inject AuthService Auth
 @inject NavigationManager Nav
 
 <div class="play-game-page">
@@ -128,6 +129,7 @@
                     break;
                 case SessionStatus.Finished:
                     _phase = PlayerPhase.Finished;
+                    _ = AwardXpAsync();
                     break;
             }
             StateHasChanged();
@@ -144,6 +146,12 @@
 
         var elapsed = (int)(DateTime.UtcNow - _questionStartTime).TotalMilliseconds;
         await Game.SubmitAnswer(PlayerId, SessionId, answer, elapsed);
+    }
+
+    private async Task AwardXpAsync()
+    {
+        try { await Auth.AwardGameXp(_rank > 0 ? _rank : 99); }
+        catch { /* non-critical */ }
     }
 
     private void HandleTimeUp()

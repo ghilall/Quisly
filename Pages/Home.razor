@@ -1,6 +1,7 @@
 @page "/"
 @using Quisly.Services
 @using Quisly.Models
+@using Quisly.Components
 @inject AuthService Auth
 @inject NavigationManager Nav
 
@@ -9,14 +10,7 @@
         <h1 class="brand-title">Quisly</h1>
         @if (Auth.IsAuthenticated)
         {
-            <div class="user-badge">
-                <span class="user-name">@(_profile?.DisplayName ?? "Player")</span>
-                @if (_profile?.AccountType == "Premium")
-                {
-                    <span class="premium-badge">★ PREMIUM</span>
-                }
-                <button class="btn-ghost" @onclick="HandleSignOut">Sign Out</button>
-            </div>
+            <PlayerMenu Profile="@_profile" OnProfileChanged="ReloadProfile" />
         }
     </header>
 
@@ -35,40 +29,93 @@
         else
         {
             <div class="action-cards">
-                <div class="action-card host-card" @onclick='() => Nav.NavigateTo("/host")'>
+                <!-- Host — Premium only -->
+                <div class="action-card host-card @(!IsPremium ? "locked-card" : "")"
+                     @onclick="TryHost">
                     <div class="card-icon">🎮</div>
                     <h3>Host a Game</h3>
                     <p>Create a session and invite players</p>
+                    @if (!IsPremium)
+                    {
+                        <span class="card-lock-badge">🔒 Premium</span>
+                    }
                 </div>
+
+                <!-- Join — Free for everyone -->
                 <div class="action-card join-card" @onclick='() => Nav.NavigateTo("/join")'>
                     <div class="card-icon">🎯</div>
                     <h3>Join a Game</h3>
                     <p>Enter a PIN or scan a QR code</p>
                 </div>
-                <div class="action-card create-card" @onclick='() => Nav.NavigateTo("/create-quiz")'>
+
+                <!-- Create Quiz — Premium only -->
+                <div class="action-card create-card @(!IsPremium ? "locked-card" : "")"
+                     @onclick="TryCreateQuiz">
                     <div class="card-icon">✏️</div>
                     <h3>Create Quiz</h3>
                     <p>Build your own quiz questions</p>
+                    @if (!IsPremium)
+                    {
+                        <span class="card-lock-badge">🔒 Premium</span>
+                    }
                 </div>
             </div>
         }
     </main>
 </div>
 
+<!-- Premium Gate Modal -->
+<PremiumGateModal IsVisible="@_showPremiumModal"
+                  FeatureName="@_gatedFeatureName"
+                  OnClose="@(() => _showPremiumModal = false)"
+                  OnUpgraded="ReloadProfile" />
+
 @code {
     private Profile? _profile;
+    private bool _showPremiumModal;
+    private string _gatedFeatureName = "";
+
+    private bool IsPremium => _profile?.IsPremium == true;
 
     protected override async Task OnInitializedAsync()
     {
+        Auth.OnAuthStateChanged += OnAuthChanged;
         if (Auth.IsAuthenticated)
-        {
             _profile = await Auth.GetCurrentProfile();
-        }
     }
 
-    private async Task HandleSignOut()
+    private async void OnAuthChanged()
     {
-        await Auth.SignOut();
-        Nav.NavigateTo("/", forceLoad: true);
+        _profile = await Auth.GetCurrentProfile(forceRefresh: true);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task ReloadProfile()
+    {
+        _profile = await Auth.GetCurrentProfile(forceRefresh: true);
+        StateHasChanged();
+    }
+
+    private void TryHost()
+    {
+        if (IsPremium) Nav.NavigateTo("/host");
+        else ShowPremiumGate("Host a Game");
+    }
+
+    private void TryCreateQuiz()
+    {
+        if (IsPremium) Nav.NavigateTo("/create-quiz");
+        else ShowPremiumGate("Create Quiz");
+    }
+
+    private void ShowPremiumGate(string featureName)
+    {
+        _gatedFeatureName = featureName;
+        _showPremiumModal = true;
+    }
+
+    public void Dispose()
+    {
+        Auth.OnAuthStateChanged -= OnAuthChanged;
     }
 }

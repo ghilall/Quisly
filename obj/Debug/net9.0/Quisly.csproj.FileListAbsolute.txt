@@ -1,9 +1,3 @@
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.csproj.AssemblyReference.cache
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.AssemblyInfoInputs.cache
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.AssemblyInfo.cs
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.csproj.CoreCompileInputs.cache
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\blazor.boot.json
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\blazor.webassembly.js
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\dotnet.js
@@ -22,6 +16,7 @@ C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspN
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Web.ns1lctei4w.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.Components.WebAssembly.soaj85mrfq.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.Metadata.1xd6vo83cv.wasm
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.WebUtilities.p9nmx8sf8y.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.CSharp.qzjvm9hz38.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Abstractions.kw6zdn2hre.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Extensions.Configuration.Binder.ved8dbz2is.wasm
@@ -44,6 +39,7 @@ C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Iden
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.IO.RecyclableMemoryStream.yxkatvvqoa.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.JSInterop.fehvqxd8e9.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.JSInterop.WebAssembly.lao5cp8gqq.wasm
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Net.Http.Headers.621f1fn1pt.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.VisualBasic.Core.790ssxljcz.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.VisualBasic.o05ci7346e.wasm
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Win32.Primitives.iclgtmwg3j.wasm
@@ -280,6 +276,7 @@ C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Websocket.Clie
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.Net.Sockets.2qi573rk74.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.Collections.k7eocx66k5.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\blazor.boot.json.gz
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.WebUtilities.p9nmx8sf8y.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.Data.DataSetExtensions.drrqo6rbpu.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.Net.Quic.bk3iyzagtw.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.Resources.Writer.dpk7abvmmf.wasm.gz
@@ -350,6 +347,7 @@ C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Exte
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.Components.Web.ns1lctei4w.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.Numerics.90814qnc69.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.IdentityModel.JsonWebTokens.do6a07o59u.wasm.gz
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Net.Http.Headers.621f1fn1pt.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.IdentityModel.Tokens.Jwt.8p36zpd3sm.wasm.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\blazor.webassembly.js.gz
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\System.Collections.NonGeneric.wor57912gd.wasm.gz
@@ -461,6 +459,7 @@ C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.AspNetCore.Components.F
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.AspNetCore.Components.Web.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.AspNetCore.Components.WebAssembly.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.AspNetCore.WebUtilities.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.Extensions.Configuration.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Binder.dll
@@ -482,6 +481,7 @@ C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dl
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.JSInterop.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.JSInterop.WebAssembly.dll
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.Net.Http.Headers.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\MimeMapping.dll
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Newtonsoft.Json.dll
@@ -675,6 +675,12 @@ C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\dotnet.runtime.js.map
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\icudt_CJK.dat
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\icudt_EFIGS.dat
 C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\icudt_no_CJK.dat
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.csproj.AssemblyReference.cache
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.AssemblyInfoInputs.cache
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.AssemblyInfo.cs
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.csproj.CoreCompileInputs.cache
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.Authorization.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.Components.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.Components.Authorization.wasm
@@ -682,6 +688,7 @@ C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.Compo
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.Components.Web.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.Components.WebAssembly.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.Metadata.wasm
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.WebUtilities.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.Extensions.Configuration.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.Extensions.Configuration.Abstractions.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.Extensions.Configuration.Binder.wasm
@@ -703,6 +710,7 @@ C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.IdentityModel.To
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.IO.RecyclableMemoryStream.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.JSInterop.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.JSInterop.WebAssembly.wasm
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.Net.Http.Headers.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.Win32.SystemEvents.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\MimeMapping.wasm
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Newtonsoft.Json.wasm
@@ -893,6 +901,8 @@ C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\scopedcss\bundle\Quisly.styles.cs
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\scopedcss\projectbundle\Quisly.bundle.scp.css
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\blazor.build.boot-extension.json
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\blazor.boot.json
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\fifdh5juca-hwuj81nhrm.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\ebssn6ja87-5nchyr0wfj.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\w7ik49yzu3-bqjiyaj88i.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\6fehibyhwg-c2jlpeoesf.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\qra6ceade6-erw9l3u2r3.gz
@@ -938,6 +948,7 @@ C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\8sr6y4o3f4-l7w71u5ddq.
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\linu6lmd1o-63fj8s7r0e.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\2rzyh70qez-alrfw7kqdf.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\8m4rs2ws9h-iag0ou56lh.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\vluy53hcmg-n3n66xxu83.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\jav3jpjipc-md9yvkcqlf.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\pqe9mfkvcz-ake9ir8xts.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\nwg7cq7qc7-ake9ir8xts.gz
@@ -948,6 +959,7 @@ C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\ojto7q3v4p-qji3ksdopo.
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\ijkh2cytji-ns1lctei4w.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\ccn0a5fytx-soaj85mrfq.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\kq5f9oe5ds-1xd6vo83cv.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\9pd3hrdcz7-p9nmx8sf8y.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\5xpus26914-u53zhhc46z.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\07vu34r69g-kw6zdn2hre.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\cbf5e2f15v-ved8dbz2is.gz
@@ -969,6 +981,7 @@ C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\x6lh7neshi-tgxjdpx9cv.
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\nu6x6ip4vj-yxkatvvqoa.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\r6mxseb3iv-fehvqxd8e9.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\cesbkr0n2z-lao5cp8gqq.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\itkpx38hj8-621f1fn1pt.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\f1v8clhl95-asbyu30enw.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\s8zcx4hjab-gmxjevqz69.gz
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\81qw6zhkfm-qkbufwhni2.gz
@@ -1176,24 +1189,12 @@ C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.dll
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\refint\Quisly.dll
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.pdb
 C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\ref\Quisly.dll
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\vluy53hcmg-n3n66xxu83.gz
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\fifdh5juca-hwuj81nhrm.gz
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.WebUtilities.p9nmx8sf8y.wasm
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Net.Http.Headers.621f1fn1pt.wasm
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.AspNetCore.WebUtilities.p9nmx8sf8y.wasm.gz
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Microsoft.Net.Http.Headers.621f1fn1pt.wasm.gz
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.AspNetCore.WebUtilities.dll
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\Microsoft.Net.Http.Headers.dll
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.AspNetCore.WebUtilities.wasm
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\webcil\Microsoft.Net.Http.Headers.wasm
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\ciw3sa1sb7-yg02rogb0c.gz
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\ebssn6ja87-5nchyr0wfj.gz
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\9pd3hrdcz7-p9nmx8sf8y.gz
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\itkpx38hj8-621f1fn1pt.gz
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.papr9sijj4.pdb
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.l4qpazxpu0.wasm
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.papr9sijj4.pdb.gz
-C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.l4qpazxpu0.wasm.gz
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\y9ynzqj58d-l4qpazxpu0.gz
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\oii6y3vcyv-papr9sijj4.gz
-C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\9p819v1d6i-dt61mopqgz.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\Quisly.sourcelink.json
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\ciw3sa1sb7-f642urkd3k.gz
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.7pjizdu53z.pdb
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.6o3pr9vat5.wasm
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.7pjizdu53z.pdb.gz
+C:\Users\Gokce\Desktop\Quisly\bin\Debug\net9.0\wwwroot\_framework\Quisly.6o3pr9vat5.wasm.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\y9ynzqj58d-6o3pr9vat5.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\oii6y3vcyv-7pjizdu53z.gz
+C:\Users\Gokce\Desktop\Quisly\obj\Debug\net9.0\compressed\9p819v1d6i-c5kbivfnl7.gz

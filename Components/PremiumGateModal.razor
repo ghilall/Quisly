@@ -1,0 +1,62 @@
+@using Quisly.Services
+@inject AuthService Auth
+
+@if (IsVisible)
+{
+    <div class="modal-backdrop" @onclick="HandleClose">
+        <div class="modal-card premium-gate-modal" @onclick:stopPropagation>
+            <div class="pgm-icon">🔒</div>
+            <h2 class="pgm-title">Premium Required</h2>
+            <p class="pgm-body">
+                <strong>@FeatureName</strong> is a Premium feature.<br />
+                Upgrade to unlock hosting, quiz creation, and more!
+            </p>
+
+            <div class="pgm-perks">
+                <div class="pgm-perk">🎮 Host unlimited live games</div>
+                <div class="pgm-perk">✏️ Create custom quizzes</div>
+                <div class="pgm-perk">📊 Advanced stats & leaderboards</div>
+                <div class="pgm-perk">★ Exclusive Premium badge</div>
+            </div>
+
+            <button class="btn-upgrade-cta" @onclick="HandleUpgrade" disabled="@_upgrading">
+                @if (_upgrading)
+                {
+                    <span>Upgrading...</span>
+                }
+                else
+                {
+                    <span>⚡ Upgrade to Premium — Only 2.99₺/month!</span>
+                }
+            </button>
+
+            <button class="pgm-cancel" @onclick="HandleClose">Maybe later</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public string FeatureName { get; set; } = "This feature";
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback OnUpgraded { get; set; }
+
+    private bool _upgrading;
+
+    private async Task HandleUpgrade()
+    {
+        _upgrading = true;
+        try
+        {
+            await Auth.UpgradeToPremium();
+            await OnUpgraded.InvokeAsync();
+            await OnClose.InvokeAsync();
+        }
+        finally
+        {
+            _upgrading = false;
+        }
+    }
+
+    private async Task HandleClose() => await OnClose.InvokeAsync();
+}

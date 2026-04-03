@@ -18,6 +18,9 @@ create table public.profiles (
     account_type text not null default 'Normal' check (account_type in ('Normal', 'Premium')),
     total_games_played integer not null default 0,
     total_games_hosted integer not null default 0,
+    total_games_won    integer not null default 0,
+    xp                 integer not null default 0,
+    level              integer not null default 1,
     created_at  timestamptz not null default now()
 );
 
@@ -221,6 +224,15 @@ create policy "Players can update own record"
 -- ============================================
 alter publication supabase_realtime add table public.sessions;
 alter publication supabase_realtime add table public.players;
+
+-- ============================================
+-- MIGRATION: XP, Level & Wins columns
+-- Run this if you have an existing profiles table
+-- ============================================
+alter table public.profiles
+    add column if not exists xp              integer not null default 0,
+    add column if not exists level           integer not null default 1,
+    add column if not exists total_games_won integer not null default 0;
 
 -- ============================================
 -- HELPER FUNCTION: Update question count
