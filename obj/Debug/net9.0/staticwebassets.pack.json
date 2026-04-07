@@ -13,6 +13,46 @@
       "PackagePath": "staticwebassets\\appsettings.json"
     },
     {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Cat Lady.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Cat Lady.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Cat.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Cat.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Ghost.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Ghost.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Panda.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Panda.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Patient.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Patient.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Pirate.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Pirate.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Pumpkin Head.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Pumpkin Head.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Rabbit.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Rabbit.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Turtle.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Turtle.png"
+    },
+    {
+      "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\assets\\avatars\\Witch.png",
+      "PackagePath": "staticwebassets\\assets\\avatars\\Witch.png"
+    },
+    {
       "Id": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },

@@ -10,8 +10,44 @@
 @inject NavigationManager Nav
 
 <div class="play-game-page">
-    @switch (_phase)
+    @if (_loading)
     {
+        <div class="waiting-phase">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    }
+    else if (_sessionNotFound)
+    {
+        <div class="waiting-phase">
+            <h2>Game not found</h2>
+            <p>This session may have ended.</p>
+            <button class="btn-primary btn-large" @onclick='() => Nav.NavigateTo("/")'>Back to Home</button>
+        </div>
+    }
+    else
+    {
+        @switch (_phase)
+        {
+        case PlayerPhase.Lobby:
+            <div class="player-lobby-phase">
+                <h2 class="brand-title">Quisly</h2>
+                <p class="lobby-subtitle">Waiting for the host to start…</p>
+                <div class="lobby-players player-lobby-list">
+                    <h3>Players (@_players.Count)</h3>
+                    <div class="player-grid">
+                        @foreach (var player in _players)
+                        {
+                            <div class="player-bubble animate-pop">
+                                <img class="avatar-img" src="@AvatarCatalog.Url(player.AvatarId)" alt="Avatar" />
+                                <span class="player-name">@player.Nickname</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            break;
+
         case PlayerPhase.Waiting:
             <div class="waiting-phase">
                 <div class="spinner"></div>
@@ -23,7 +59,7 @@
         case PlayerPhase.Answering:
             <div class="answering-phase">
                 <div class="timer-bar">
-                    <CountdownTimer TotalSeconds="@_timeLimit" OnTimeUp="HandleTimeUp" />
+                    <CountdownTimer TotalSeconds="@_timeLimit" OnTick="HandleTick" OnTimeUp="HandleTimeUp" />
                 </div>
                 <h2 class="player-question-text">@_questionText</h2>
                 <div class="answer-grid">
@@ -50,9 +86,15 @@
         case PlayerPhase.Answered:
             <div class="answered-phase">
                 <div class="answer-sent">
+                    <div class="timer-bar">
+                        <CountdownTimer TotalSeconds="@_timeLimit"
+                                        StartSeconds="@_secondsLeft"
+                                        OnTick="HandleTick"
+                                        OnTimeUp="NoOp" />
+                    </div>
                     <span class="big-check">✓</span>
                     <h2>Answer submitted!</h2>
-                    <p>Waiting for results...</p>
+                    <p>Waiting for other players...</p>
                 </div>
             </div>
             break;
@@ -73,12 +115,17 @@
         case PlayerPhase.Finished:
             <div class="finished-phase">
                 <h1>Game Over!</h1>
-                <p class="final-score-label">Your Final Score</p>
-                <p class="final-score-value">@_totalScore</p>
-                <p class="final-rank">Rank: #@_rank</p>
+                <Podium Players="_players" />
+                <Leaderboard Players="_players" />
+                <div style="margin-top:16px;">
+                    <p class="final-score-label">Your Final Score</p>
+                    <p class="final-score-value">@_totalScore</p>
+                    <p class="final-rank">Rank: #@_rank</p>
+                </div>
                 <button class="btn-primary btn-large" @onclick='() => Nav.NavigateTo("/")'>Back to Home</button>
             </div>
             break;
+        }
     }
 </div>
 
@@ -86,7 +133,10 @@
     [Parameter] public string SessionId { get; set; } = "";
     [Parameter] public string PlayerId { get; set; } = "";
 
-    private PlayerPhase _phase = PlayerPhase.Waiting;
+    private PlayerPhase _phase = PlayerPhase.Lobby;
+    private List<Player> _players = new();
+    private bool _loading = true;
+    private bool _sessionNotFound;
     private string _questionText = "";
     private string _optionA = "", _optionB = "", _optionC = "", _optionD = "";
     private string? _selectedAnswer;
@@ -98,37 +148,119 @@
     private int _rank = 0;
     private int _timeLimit = 20;
     private DateTime _questionStartTime;
+    private int _secondsLeft;
+    private int _scoreBeforeQuestion;
     private DotNetObjectReference<PlayGame>? _selfRef;
+    private CancellationTokenSource? _pollCts;
 
-    private enum PlayerPhase { Waiting, Answering, Answered, Result, Finished }
+    private enum PlayerPhase { Lobby, Waiting, Answering, Answered, Result, Finished }
 
     protected override async Task OnInitializedAsync()
     {
         _selfRef = DotNetObjectReference.Create(this);
+
+        var session = await Game.GetSessionById(SessionId);
+        _players = await Game.GetSessionPlayers(SessionId);
+
+        if (session == null)
+        {
+            _sessionNotFound = true;
+            _loading = false;
+            return;
+        }
+
+        switch (session.Status)
+        {
+            case SessionStatus.Lobby:
+                _phase = PlayerPhase.Lobby;
+                break;
+            case SessionStatus.ShowingQuestion:
+                await LoadQuestionAsync(session);
+                _phase = PlayerPhase.Answering;
+                _questionStartTime = DateTime.UtcNow;
+                _secondsLeft = _timeLimit;
+                _scoreBeforeQuestion = (await Game.GetPlayerById(PlayerId))?.Score ?? 0;
+                break;
+            case SessionStatus.ShowingResults:
+                _phase = PlayerPhase.Answered;
+                break;
+            case SessionStatus.Leaderboard:
+                _phase = PlayerPhase.Result;
+                await RefreshResultAsync();
+                break;
+            case SessionStatus.Finished:
+                _phase = PlayerPhase.Finished;
+                await RefreshRankAsync();
+                break;
+            default:
+                _phase = PlayerPhase.Waiting;
+                break;
+        }
+
         await Realtime.SubscribeToSession(SessionId, _selfRef);
+        await Realtime.SubscribeToPlayers(SessionId, _selfRef);
+        _pollCts = new CancellationTokenSource();
+        _ = PollLoopAsync(_pollCts.Token);
+        _loading = false;
+    }
+
+    private async Task LoadQuestionAsync(GameSession session)
+    {
+        var questions = await Game.GetQuizQuestions(session.QuizId);
+        var idx = session.CurrentQuestionIndex;
+        if (questions.Count == 0 || idx < 0 || idx >= questions.Count)
+            return;
+
+        var q = questions[idx];
+        _questionText = q.QuestionText;
+        _optionA = q.OptionA;
+        _optionB = q.OptionB;
+        _optionC = q.OptionC;
+        _optionD = q.OptionD;
+        _timeLimit = q.TimeLimitSeconds;
+    }
+
+    [JSInvokable]
+    public async Task OnPlayersChanged()
+    {
+        await InvokeAsync(async () =>
+        {
+            _players = await Game.GetSessionPlayers(SessionId);
+            StateHasChanged();
+        });
     }
 
     [JSInvokable]
     public async Task OnSessionStatusChanged(string status)
     {
-        await InvokeAsync(() =>
+        await InvokeAsync(async () =>
         {
             switch (status)
             {
+                case SessionStatus.Lobby:
+                    _phase = PlayerPhase.Lobby;
+                    break;
                 case SessionStatus.ShowingQuestion:
+                    var session = await Game.GetSessionById(SessionId);
+                    if (session != null)
+                        await LoadQuestionAsync(session);
                     _phase = PlayerPhase.Answering;
                     _answered = false;
                     _selectedAnswer = null;
                     _questionStartTime = DateTime.UtcNow;
+                    _secondsLeft = _timeLimit;
+                    _scoreBeforeQuestion = (await Game.GetPlayerById(PlayerId))?.Score ?? _totalScore;
                     break;
                 case SessionStatus.ShowingResults:
                     if (!_answered) _phase = PlayerPhase.Answered;
                     break;
                 case SessionStatus.Leaderboard:
                     _phase = PlayerPhase.Result;
+                    await RefreshResultAsync();
                     break;
                 case SessionStatus.Finished:
                     _phase = PlayerPhase.Finished;
+                    await RefreshRankAsync();
                     _ = AwardXpAsync();
                     break;
             }
@@ -156,15 +288,74 @@
 
     private void HandleTimeUp()
     {
-        if (!_answered)
+        if (_answered) return;
+        _answered = true;
+        _phase = PlayerPhase.Answered;
+        _ = Game.SubmitAnswer(PlayerId, SessionId, "", _timeLimit * 1000);
+    }
+
+    private void HandleTick(int secondsLeft)
+    {
+        _secondsLeft = secondsLeft;
+    }
+
+    private Task NoOp() => Task.CompletedTask;
+
+    private async Task RefreshResultAsync()
+    {
+        var me = await Game.GetPlayerById(PlayerId);
+        if (me == null) return;
+
+        _wasCorrect = me.LastAnswerCorrect == true;
+        _streak = me.CurrentStreak;
+        _totalScore = me.Score;
+        _pointsGained = Math.Max(0, me.Score - _scoreBeforeQuestion);
+        await RefreshRankAsync();
+    }
+
+    private async Task RefreshRankAsync()
+    {
+        _players = await Game.GetSessionPlayers(SessionId);
+        var idx = _players.FindIndex(p => p.Id == PlayerId);
+        _rank = idx >= 0 ? idx + 1 : 0;
+    }
+
+    private async Task PollLoopAsync(CancellationToken token)
+    {
+        var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        try
         {
-            _answered = true;
-            _phase = PlayerPhase.Answered;
+            string? lastStatus = null;
+            int? lastQ = null;
+
+            while (await timer.WaitForNextTickAsync(token))
+            {
+                var session = await Game.GetSessionById(SessionId);
+                if (session == null) continue;
+
+                if (lastStatus != session.Status || lastQ != session.CurrentQuestionIndex)
+                {
+                    lastStatus = session.Status;
+                    lastQ = session.CurrentQuestionIndex;
+                    await OnSessionStatusChanged(session.Status);
+                }
+
+                // Keep rank/players fresh in result/finished views.
+                if (_phase is PlayerPhase.Result or PlayerPhase.Finished)
+                {
+                    await RefreshRankAsync();
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
         }
+        catch (OperationCanceledException) { }
+        finally { timer.Dispose(); }
     }
 
     public async ValueTask DisposeAsync()
     {
+        try { _pollCts?.Cancel(); } catch { }
+        _pollCts?.Dispose();
         await Realtime.UnsubscribeAll();
         _selfRef?.Dispose();
     }

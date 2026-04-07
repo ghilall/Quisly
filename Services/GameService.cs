@@ -34,24 +34,66 @@ public class GameService
         return session;
     }
 
+    public async Task<GameSession?> GetSessionById(string sessionId)
+    {
+        var response = await _supabase.Client
+            .From<GameSession>()
+            .Where(s => s.Id == sessionId)
+            .Get();
+
+        return response.Models.FirstOrDefault();
+    }
+
     public async Task<GameSession?> JoinByPin(string pin)
     {
-        var session = await _supabase.Client
+        var response = await _supabase.Client
             .From<GameSession>()
             .Where(s => s.Pin == pin)
             .Where(s => s.Status == SessionStatus.Lobby)
-            .Single();
+            .Get();
 
-        return session;
+        return response.Models.FirstOrDefault();
     }
 
-    public async Task<Player> AddPlayer(string sessionId, string nickname)
+    public async Task<Player> AddPlayer(string sessionId, string nickname, string? avatarId = null)
     {
         var player = new Player
         {
-            //SessionId = sessionId,
+            SessionId = sessionId,
             UserId = _auth.CurrentUser?.Id,
             Nickname = nickname,
+            AvatarId = string.IsNullOrWhiteSpace(avatarId) ? "cat_lady" : avatarId,
+            Score = 0,
+            CurrentStreak = 0,
+            JoinedAt = DateTime.UtcNow
+        };
+
+        await _supabase.Client.From<Player>().Insert(player);
+        return player;
+    }
+
+    public async Task<Player?> GetPlayerByUser(string sessionId, string userId)
+    {
+        var response = await _supabase.Client
+            .From<Player>()
+            .Where(p => p.SessionId == sessionId)
+            .Where(p => p.UserId == userId)
+            .Get();
+
+        return response.Models.FirstOrDefault();
+    }
+
+    public async Task<Player> EnsurePlayerForUser(string sessionId, string userId, string nickname, string? avatarId = null)
+    {
+        var existing = await GetPlayerByUser(sessionId, userId);
+        if (existing != null) return existing;
+
+        var player = new Player
+        {
+            SessionId = sessionId,
+            UserId = userId,
+            Nickname = nickname,
+            AvatarId = string.IsNullOrWhiteSpace(avatarId) ? "cat_lady" : avatarId,
             Score = 0,
             CurrentStreak = 0,
             JoinedAt = DateTime.UtcNow
@@ -70,6 +112,40 @@ public class GameService
             .Get();
 
         return response.Models;
+    }
+
+    public async Task<Player?> GetPlayerById(string playerId)
+    {
+        var player = await _supabase.Client
+            .From<Player>()
+            .Where(p => p.Id == playerId)
+            .Single();
+
+        return player;
+    }
+
+    public async Task UpdatePlayerNickname(string playerId, string nickname)
+    {
+        var player = await _supabase.Client
+            .From<Player>()
+            .Where(p => p.Id == playerId)
+            .Single();
+
+        if (player == null) return;
+        player.Nickname = nickname;
+        await player.Update<Player>();
+    }
+
+    public async Task UpdatePlayerAvatar(string playerId, string avatarId)
+    {
+        var player = await _supabase.Client
+            .From<Player>()
+            .Where(p => p.Id == playerId)
+            .Single();
+
+        if (player == null) return;
+        player.AvatarId = string.IsNullOrWhiteSpace(avatarId) ? "cat_lady" : avatarId;
+        await player.Update<Player>();
     }
 
     public async Task UpdateSessionStatus(string sessionId, string status, int? questionIndex = null)
@@ -105,6 +181,18 @@ public class GameService
             player.LastAnswer = answer;
             player.LastAnswerTimeMs = timeMs;
             await player.Update<Player>();
+        }
+    }
+
+    public async Task ResetAnswers(string sessionId)
+    {
+        var players = await GetSessionPlayers(sessionId);
+        foreach (var p in players)
+        {
+            p.LastAnswer = null;
+            p.LastAnswerTimeMs = null;
+            p.LastAnswerCorrect = null;
+            await p.Update<Player>();
         }
     }
 

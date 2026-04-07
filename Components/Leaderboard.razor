@@ -10,6 +10,7 @@
             var rank = i + 1;
             <div class="leaderboard-row @(rank <= 3 ? $"top-{rank}" : "")">
                 <span class="leaderboard-rank">@RankEmoji(rank)</span>
+                <img class="avatar-img" src="@AvatarCatalog.Url(player.AvatarId)" alt="Avatar" />
                 <span class="leaderboard-name">@player.Nickname</span>
                 <span class="leaderboard-streak" title="Streak">
                     @if (player.CurrentStreak > 0)

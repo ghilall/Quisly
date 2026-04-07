@@ -118,6 +118,7 @@ create table public.players (
     session_id          uuid not null references public.sessions(id) on delete cascade,
     user_id             uuid references public.profiles(id) on delete set null,
     nickname            text not null,
+    avatar_id           text not null default 'cat_lady',
     score               integer not null default 0,
     current_streak      integer not null default 0,
     last_answer         text check (last_answer in ('A', 'B', 'C', 'D') or last_answer is null),

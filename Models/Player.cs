@@ -19,6 +19,9 @@ public class Player : BaseModel
     [Column("nickname")]
     public string Nickname { get; set; } = string.Empty;
 
+    [Column("avatar_id")]
+    public string AvatarId { get; set; } = "cat_lady";
+
     [Column("score")]
     public int Score { get; set; }
 

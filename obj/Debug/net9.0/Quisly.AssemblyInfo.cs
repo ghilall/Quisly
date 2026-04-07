@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Quisly")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98b1c1d6f760f953de713187e2303ffe58818bd0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7bcd994b48d420f07bd9a60081dd60a99d843f12")]
 [assembly: System.Reflection.AssemblyProductAttribute("Quisly")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Quisly")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

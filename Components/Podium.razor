@@ -5,7 +5,7 @@
     @if (Players.Count >= 2)
     {
         <div class="podium-place second">
-            <div class="podium-avatar">🥈</div>
+            <img class="avatar-img avatar-img-lg" src="@AvatarCatalog.Url(Players[1].AvatarId)" alt="Avatar" />
             <div class="podium-name">@Players[1].Nickname</div>
             <div class="podium-score">@Players[1].Score.ToString("N0")</div>
             <div class="podium-bar bar-2"></div>
@@ -14,7 +14,7 @@
     @if (Players.Count >= 1)
     {
         <div class="podium-place first">
-            <div class="podium-avatar">🥇</div>
+            <img class="avatar-img avatar-img-lg" src="@AvatarCatalog.Url(Players[0].AvatarId)" alt="Avatar" />
             <div class="podium-name">@Players[0].Nickname</div>
             <div class="podium-score">@Players[0].Score.ToString("N0")</div>
             <div class="podium-bar bar-1"></div>
@@ -23,7 +23,7 @@
     @if (Players.Count >= 3)
     {
         <div class="podium-place third">
-            <div class="podium-avatar">🥉</div>
+            <img class="avatar-img avatar-img-lg" src="@AvatarCatalog.Url(Players[2].AvatarId)" alt="Avatar" />
             <div class="podium-name">@Players[2].Nickname</div>
             <div class="podium-score">@Players[2].Score.ToString("N0")</div>
             <div class="podium-bar bar-3"></div>

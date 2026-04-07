@@ -28,6 +28,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Gokce/Desktop/Quisly/Components/AvatarPicker.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBdmF0YXJQaWNrZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Gokce/Desktop/Quisly/Components/CountdownTimer.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb3VudGRvd25UaW1lci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

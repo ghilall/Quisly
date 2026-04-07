@@ -6,10 +6,26 @@
 @implements IAsyncDisposable
 @inject GameService Game
 @inject RealtimeService Realtime
+@inject AuthService Auth
 @inject NavigationManager Nav
 
 <div class="host-game-page">
-    @if (_currentQuestion != null)
+    @if (_loading)
+    {
+        <div class="waiting-phase">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    }
+    else if (_sessionNotFound)
+    {
+        <div class="waiting-phase">
+            <h2>Game not found</h2>
+            <p>This session may have ended.</p>
+            <button class="btn-primary btn-large" @onclick='() => Nav.NavigateTo("/")'>Back to Home</button>
+        </div>
+    }
+    else if (_currentQuestion != null)
     {
         @switch (_phase)
         {
@@ -18,14 +34,27 @@
                     <div class="question-header-bar">
                         <span class="question-counter">@(_currentIndex + 1) / @_questions.Count</span>
                         <CountdownTimer TotalSeconds="@_currentQuestion.TimeLimitSeconds"
+                                        OnTick="HandleTick"
                                         OnTimeUp="HandleTimeUp" />
                     </div>
                     <h2 class="question-text">@_currentQuestion.QuestionText</h2>
                     <div class="answer-grid">
-                        <GameButton Text="@_currentQuestion.OptionA" Color="red" Icon="▲" />
-                        <GameButton Text="@_currentQuestion.OptionB" Color="blue" Icon="◆" />
-                        <GameButton Text="@_currentQuestion.OptionC" Color="yellow" Icon="●" />
-                        <GameButton Text="@_currentQuestion.OptionD" Color="green" Icon="■" />
+                        <GameButton Text="@_currentQuestion.OptionA" Color="red" Icon="▲"
+                                    IsSelected="@(_selectedAnswer == "A")"
+                                    IsDisabled="@_answeredByHost"
+                                    OnClick="@(() => SubmitHostAnswer("A"))" />
+                        <GameButton Text="@_currentQuestion.OptionB" Color="blue" Icon="◆"
+                                    IsSelected="@(_selectedAnswer == "B")"
+                                    IsDisabled="@_answeredByHost"
+                                    OnClick="@(() => SubmitHostAnswer("B"))" />
+                        <GameButton Text="@_currentQuestion.OptionC" Color="yellow" Icon="●"
+                                    IsSelected="@(_selectedAnswer == "C")"
+                                    IsDisabled="@_answeredByHost"
+                                    OnClick="@(() => SubmitHostAnswer("C"))" />
+                        <GameButton Text="@_currentQuestion.OptionD" Color="green" Icon="■"
+                                    IsSelected="@(_selectedAnswer == "D")"
+                                    IsDisabled="@_answeredByHost"
+                                    OnClick="@(() => SubmitHostAnswer("D"))" />
                     </div>
                     <div class="answer-count">
                         <span>@_answeredCount / @_players.Count answered</span>
@@ -99,18 +128,70 @@
     private List<Question> _questions = new();
     private List<Player> _players = new();
     private Question? _currentQuestion;
+    private GameSession? _session;
     private int _currentIndex;
     private int _answeredCount;
+    private bool _loading = true;
+    private bool _sessionNotFound;
     private GamePhase _phase = GamePhase.ShowingQuestion;
     private DotNetObjectReference<HostGame>? _selfRef;
+    private CancellationTokenSource? _pollCts;
+
+    private string? _hostPlayerId;
+    private DateTime _questionStartTime;
+    private int _secondsLeft;
+    private bool _answeredByHost;
+    private string? _selectedAnswer;
+    private bool _hostXpAwarded;
 
     private enum GamePhase { ShowingQuestion, ShowingResults, Leaderboard, FinalResults }
 
     protected override async Task OnInitializedAsync()
     {
         _selfRef = DotNetObjectReference.Create(this);
+        _session = await Game.GetSessionById(SessionId);
+        if (_session == null)
+        {
+            _sessionNotFound = true;
+            _loading = false;
+            return;
+        }
+
+        // Ensure host is also a player (so they can answer and appear in leaderboard).
+        if (Auth.CurrentUser?.Id != null)
+        {
+            var profile = await Auth.GetCurrentProfile();
+            var nickname = string.IsNullOrWhiteSpace(profile?.Username) ? "Host" : profile!.Username;
+            var hostPlayer = await Game.EnsurePlayerForUser(SessionId, Auth.CurrentUser.Id, nickname);
+            _hostPlayerId = hostPlayer.Id;
+        }
+
+        _questions = await Game.GetQuizQuestions(_session.QuizId);
+        _currentIndex = Math.Max(0, Math.Min(_session.CurrentQuestionIndex, Math.Max(0, _questions.Count - 1)));
+        _currentQuestion = _questions.Count > 0 ? _questions[_currentIndex] : null;
+
         _players = await Game.GetSessionPlayers(SessionId);
+        _answeredCount = _players.Count(p => p.LastAnswer != null);
+
+        _phase = _session.Status switch
+        {
+            SessionStatus.ShowingResults => GamePhase.ShowingResults,
+            SessionStatus.Leaderboard => GamePhase.Leaderboard,
+            SessionStatus.Finished => GamePhase.FinalResults,
+            _ => GamePhase.ShowingQuestion
+        };
+        if (_phase == GamePhase.FinalResults)
+            _ = AwardHostXpOnceAsync();
+
+        _questionStartTime = DateTime.UtcNow;
+        _secondsLeft = _currentQuestion?.TimeLimitSeconds ?? 0;
+
+        // Realtime may no-op (offline/DNS); polling keeps the game responsive.
         await Realtime.SubscribeToPlayers(SessionId, _selfRef);
+        await Realtime.SubscribeToSession(SessionId, _selfRef);
+        _pollCts = new CancellationTokenSource();
+        _ = PollLoopAsync(_pollCts.Token);
+        _loading = false;
     }
 
     [JSInvokable]
@@ -120,14 +201,43 @@
         {
             _players = await Game.GetSessionPlayers(SessionId);
             _answeredCount = _players.Count(p => p.LastAnswer != null);
+            if (_phase == GamePhase.ShowingQuestion && _players.Count > 0 && _answeredCount >= _players.Count)
+            {
+                await TransitionToResultsAsync();
+            }
             StateHasChanged();
         });
     }
 
+    [JSInvokable]
+    public async Task OnSessionStatusChanged(string status)
+    {
+        await InvokeAsync(() =>
+        {
+            if (status == SessionStatus.ShowingResults) _phase = GamePhase.ShowingResults;
+            else if (status == SessionStatus.Leaderboard) _phase = GamePhase.Leaderboard;
+            else if (status == SessionStatus.Finished) _phase = GamePhase.FinalResults;
+            else if (status == SessionStatus.ShowingQuestion) _phase = GamePhase.ShowingQuestion;
+            StateHasChanged();
+        });
+    }
+
+    private void HandleTick(int secondsLeft)
+    {
+        _secondsLeft = secondsLeft;
+    }
+
     private async Task HandleTimeUp()
+    {
+        if (_phase != GamePhase.ShowingQuestion) return;
+        await TransitionToResultsAsync();
+    }
+
+    private async Task TransitionToResultsAsync()
     {
         await ScoreCurrentQuestion();
         _phase = GamePhase.ShowingResults;
+        await Game.UpdateSessionStatus(SessionId, SessionStatus.ShowingResults, _currentIndex);
         StateHasChanged();
     }
 
@@ -155,6 +265,7 @@
     private void ShowLeaderboard()
     {
         _phase = GamePhase.Leaderboard;
+        _ = Game.UpdateSessionStatus(SessionId, SessionStatus.Leaderboard, _currentIndex);
     }
 
     private async Task NextQuestion()
@@ -163,12 +274,13 @@
         _currentQuestion = _questions[_currentIndex];
         _answeredCount = 0;
         _phase = GamePhase.ShowingQuestion;
+        _questionStartTime = DateTime.UtcNow;
+        _secondsLeft = _currentQuestion.TimeLimitSeconds;
+        _answeredByHost = false;
+        _selectedAnswer = null;
 
-        foreach (var player in _players)
-        {
-            player.LastAnswer = null;
-            player.LastAnswerTimeMs = null;
-        }
+        await Game.ResetAnswers(SessionId);
+        _players = await Game.GetSessionPlayers(SessionId);
 
         await Game.UpdateSessionStatus(SessionId, SessionStatus.ShowingQuestion, _currentIndex);
     }
@@ -177,6 +289,7 @@
     {
         _phase = GamePhase.FinalResults;
         await Game.UpdateSessionStatus(SessionId, SessionStatus.Finished);
+        _ = AwardHostXpOnceAsync();
     }
 
     private int GetAnswerPercentage(string option)
@@ -188,7 +301,93 @@
 
     public async ValueTask DisposeAsync()
     {
+        try { _pollCts?.Cancel(); } catch { }
+        _pollCts?.Dispose();
         await Realtime.UnsubscribeAll();
         _selfRef?.Dispose();
+    }
+
+    private async Task SubmitHostAnswer(string answer)
+    {
+        if (_answeredByHost || _hostPlayerId == null || _currentQuestion == null) return;
+
+        _selectedAnswer = answer;
+        _answeredByHost = true;
+
+        var elapsed = (int)(DateTime.UtcNow - _questionStartTime).TotalMilliseconds;
+        await Game.SubmitAnswer(_hostPlayerId, SessionId, answer, elapsed);
+
+        // Refresh counts quickly after host answers.
+        await OnPlayersChanged();
+    }
+
+    private async Task PollLoopAsync(CancellationToken token)
+    {
+        var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
+        try
+        {
+            while (await timer.WaitForNextTickAsync(token))
+            {
+                var session = await Game.GetSessionById(SessionId);
+                if (session == null) continue;
+
+                if (_session == null || session.Status != _session.Status || session.CurrentQuestionIndex != _session.CurrentQuestionIndex)
+                {
+                    _session = session;
+                    _phase = session.Status switch
+                    {
+                        SessionStatus.ShowingResults => GamePhase.ShowingResults,
+                        SessionStatus.Leaderboard => GamePhase.Leaderboard,
+                        SessionStatus.Finished => GamePhase.FinalResults,
+                        _ => GamePhase.ShowingQuestion
+                    };
+                    if (_phase == GamePhase.FinalResults)
+                        _ = AwardHostXpOnceAsync();
+
+                    if (session.CurrentQuestionIndex != _currentIndex && _questions.Count > 0)
+                    {
+                        _currentIndex = Math.Max(0, Math.Min(session.CurrentQuestionIndex, _questions.Count - 1));
+                        _currentQuestion = _questions[_currentIndex];
+                        _questionStartTime = DateTime.UtcNow;
+                        _secondsLeft = _currentQuestion.TimeLimitSeconds;
+                        _answeredByHost = false;
+                        _selectedAnswer = null;
+                    }
+                }
+
+                _players = await Game.GetSessionPlayers(SessionId);
+                _answeredCount = _players.Count(p => p.LastAnswer != null);
+
+                if (_phase == GamePhase.ShowingQuestion && _players.Count > 0 && _answeredCount >= _players.Count)
+                {
+                    await TransitionToResultsAsync();
+                }
+
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (OperationCanceledException) { }
+        finally { timer.Dispose(); }
+    }
+
+    private async Task AwardHostXpOnceAsync()
+    {
+        if (_hostXpAwarded) return;
+        if (_hostPlayerId == null) return;
+
+        _hostXpAwarded = true;
+        try
+        {
+            // Players are already ordered by score desc.
+            _players = await Game.GetSessionPlayers(SessionId);
+            var idx = _players.FindIndex(p => p.Id == _hostPlayerId);
+            var rank = idx >= 0 ? idx + 1 : 99;
+            await Auth.AwardGameXp(rank);
+        }
+        catch
+        {
+            // Non-critical; avoid breaking the host screen if XP award fails.
+            _hostXpAwarded = false;
+        }
     }
 }

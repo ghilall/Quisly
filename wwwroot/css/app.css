@@ -3,7 +3,8 @@
    Kahoot-inspired vibrant, playful design
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap');
+/* External font import removed to avoid DNS failures/offline issues.
+   Font stacks below fall back to system fonts. */
 
 /* ---- CSS Variables ---- */
 :root {
@@ -34,8 +35,8 @@
     --color-error: #f44336;
     --color-warning: #ff9800;
 
-    --font-display: 'Fredoka One', cursive;
-    --font-body: 'Nunito', sans-serif;
+    --font-display: ui-rounded, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    --font-body: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
 
     --radius-sm: 8px;
     --radius-md: 14px;
@@ -634,6 +635,146 @@ select.form-input {
     margin-top: 0.5rem;
     font-weight: 700;
     color: var(--color-text-muted);
+}
+
+/* ---- Avatar Picker ---- */
+.avatar-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: block;
+    background: #1f1433;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    object-fit: cover;
+}
+
+.avatar-img-lg {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+}
+
+.avatar-picker {
+    width: 100%;
+}
+
+.avatar-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.avatar-picker-title {
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+.avatar-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+}
+
+.avatar-preview-name {
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.avatar-preview-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 9999;
+}
+
+.modal-card {
+    width: min(780px, 100%);
+    background: var(--color-bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 16px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.modal-footer {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.avatar-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+}
+
+@media (max-width: 680px) {
+    .avatar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.avatar-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+.avatar-tile:hover {
+    border-color: rgba(204, 115, 255, 0.45);
+}
+
+.avatar-tile.selected {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(204, 115, 255, 0.18);
+}
+
+.avatar-tile-name {
+    font-weight: 700;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-align: center;
 }
 
 /* ---- Leaderboard ---- */

@@ -1,0 +1,87 @@
+@namespace Quisly.Components
+
+<div class="avatar-picker">
+    <div class="avatar-picker-header">
+        <div class="avatar-picker-title">Customize Your Avatar</div>
+        @if (ShowOpenButton)
+        {
+            <button class="btn-accent" @onclick="Open">Choose</button>
+        }
+    </div>
+
+    <div class="avatar-preview-row">
+        <img class="avatar-img avatar-img-lg" src="@AvatarCatalog.Url(SelectedAvatarId)" alt="Selected avatar" />
+        <div class="avatar-preview-meta">
+            <div class="avatar-preview-name">@AvatarCatalog.Get(SelectedAvatarId).Name</div>
+            <div class="avatar-preview-actions">
+                <button class="btn-secondary" @onclick="Prev" disabled="@(!CanNavigate)">Prev</button>
+                <button class="btn-secondary" @onclick="Next" disabled="@(!CanNavigate)">Next</button>
+                <button class="btn-accent" @onclick="Open">Pick from grid</button>
+            </div>
+        </div>
+    </div>
+
+    @if (_open)
+    {
+        <div class="modal-backdrop" @onclick="Close">
+            <div class="modal-card avatar-modal" @onclick:stopPropagation="true">
+                <div class="modal-header">
+                    <h3>Choose an avatar</h3>
+                    <button class="modal-close" @onclick="Close">✕</button>
+                </div>
+
+                <div class="avatar-grid">
+                    @foreach (var a in AvatarCatalog.All)
+                    {
+                        var selected = a.Id == SelectedAvatarId;
+                        <button class="avatar-tile @(selected ? "selected" : "")"
+                                @onclick="@(() => Select(a.Id))"
+                                title="@a.Name">
+                            <img class="avatar-img" src="@AvatarCatalog.Url(a.Id)" alt="@a.Name" />
+                            <div class="avatar-tile-name">@a.Name</div>
+                        </button>
+                    }
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-primary" @onclick="Close">Done</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string SelectedAvatarId { get; set; } = "cat_lady";
+    [Parameter] public EventCallback<string> SelectedAvatarIdChanged { get; set; }
+    [Parameter] public bool ShowOpenButton { get; set; } = false;
+    [Parameter] public bool CanNavigate { get; set; } = true;
+
+    private bool _open;
+
+    private void Open() => _open = true;
+    private void Close() => _open = false;
+
+    private async Task Select(string id)
+    {
+        SelectedAvatarId = id;
+        await SelectedAvatarIdChanged.InvokeAsync(id);
+    }
+
+    private async Task Prev()
+    {
+        var list = AvatarCatalog.All;
+        var idx = Math.Max(0, list.ToList().FindIndex(a => a.Id == SelectedAvatarId));
+        var next = idx - 1 < 0 ? list.Count - 1 : idx - 1;
+        await Select(list[next].Id);
+    }
+
+    private async Task Next()
+    {
+        var list = AvatarCatalog.All;
+        var idx = Math.Max(0, list.ToList().FindIndex(a => a.Id == SelectedAvatarId));
+        var next = (idx + 1) % list.Count;
+        await Select(list[next].Id);
+    }
+}
+

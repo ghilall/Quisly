@@ -3,10 +3,9 @@ window.QuislyRealtime = {
     _channels: {},
 
     init: function (url, anonKey) {
-        if (!window.supabase) {
-            console.error("Supabase JS client not loaded");
-            return;
-        }
+        // If Supabase JS is unavailable (offline / DNS issues / CSP),
+        // we silently no-op and the app will fall back to polling.
+        if (!window.supabase) return;
         this._client = window.supabase.createClient(url, anonKey);
     },
 

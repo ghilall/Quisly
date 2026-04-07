@@ -1,6 +1,7 @@
 @page "/join"
 @page "/join/{PinParam}"
 @using Quisly.Services
+@using Quisly.Components
 @inject GameService Game
 @inject AuthService Auth
 @inject NavigationManager Nav
@@ -10,13 +11,22 @@
         <h1 class="brand-title">Quisly</h1>
         <h2>Join a Game</h2>
 
-        @if (!string.IsNullOrEmpty(_error))
+        @if (!Auth.IsAuthenticated)
+        {
+            <div class="auth-required">
+                <p>You need to sign in to join a game.</p>
+                <button class="btn-primary" @onclick='() => Nav.NavigateTo("/login")'>Sign In</button>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(_error))
         {
             <div class="error-banner">@_error</div>
         }
 
-        @if (!_joined)
+        @if (Auth.IsAuthenticated && !_joined)
         {
+            <AvatarPicker @bind-SelectedAvatarId="_avatarId" />
+
             <div class="pin-input-section">
                 <label>Game PIN</label>
                 <div class="pin-input-group">
@@ -34,12 +44,12 @@
                 @(_loading ? "Joining..." : "Join Game!")
             </button>
         }
-        else
+        else if (Auth.IsAuthenticated && _joined)
         {
             <div class="waiting-screen">
                 <div class="spinner"></div>
                 <h3>You're in, @_nickname!</h3>
-                <p>Waiting for the host to start the game...</p>
+                <p>Loading the game lobby…</p>
             </div>
         }
     </div>
@@ -50,16 +60,25 @@
 
     private string _pin = "";
     private string _nickname = "";
+    private string _avatarId = "cat_lady";
     private string _error = "";
     private bool _loading;
     private bool _joined;
     private string? _sessionId;
     private string? _playerId;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         if (!string.IsNullOrEmpty(PinParam))
             _pin = PinParam;
+
+        // Default nickname = account username, but user can edit it.
+        if (Auth.IsAuthenticated)
+        {
+            var profile = await Auth.GetCurrentProfile();
+            if (!string.IsNullOrWhiteSpace(profile?.Username))
+                _nickname = profile!.Username;
+        }
     }
 
     private async Task HandleJoin()
@@ -69,6 +88,12 @@
 
         try
         {
+            if (!Auth.IsAuthenticated)
+            {
+                _error = "You must be signed in to join a game.";
+                return;
+            }
+
             if (_pin.Length != 6)
             {
                 _error = "Please enter a 6-digit PIN.";
@@ -89,7 +114,7 @@
             }
 
             _sessionId = session.Id;
-            var player = await Game.AddPlayer(session.Id, _nickname);
+            var player = await Game.AddPlayer(session.Id, _nickname, _avatarId);
             _playerId = player.Id;
             _joined = true;
 

@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "Quisly",
   "resources": {
-    "hash": "sha256-JjN97yiidgkMBOtxkoGpfs60Ak/xbg5Xu3rQxC56joA=",
+    "hash": "sha256-mZpDV4r8vIeYnY2qekyC6Q3vrh+6D9Uo54XkKHPt3nQ=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Authorization.da83xzpz5r.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.vmzb2angnn.wasm": "Microsoft.AspNetCore.Components.wasm",
@@ -224,8 +224,8 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "Quisly.6o3pr9vat5.wasm": "Quisly.wasm",
-      "Quisly.7pjizdu53z.pdb": "Quisly.pdb"
+      "Quisly.3bsvvcna9x.wasm": "Quisly.wasm",
+      "Quisly.ynyljmg2x7.pdb": "Quisly.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.1p93gcv9fh.js": "sha256-1UPiprzN3JhPftx3be7XEMaYlUN+chRF41CuttiWVtQ="
@@ -458,10 +458,10 @@
       "WindowsBase.ag32297siy.wasm": "sha256-BgyZxTgdU9rIYlNC9ZMiMjnvBAJSL0eQH8Y87o1M+q4=",
       "mscorlib.vt9pwshhot.wasm": "sha256-/aFxOaPc1iTNlJw0z4/RGEMD0nzl4qVE3SF4wMsLgp0=",
       "netstandard.or41gtprh3.wasm": "sha256-nD1KqAI5YYz+YohqHaZ5EmXi7Eq9Uy9sUknnI8sj1AM=",
-      "Quisly.6o3pr9vat5.wasm": "sha256-1g24ezaCuUpJMJKkiy4ckjd4aNRU/dnGS0mPiZLSolY="
+      "Quisly.3bsvvcna9x.wasm": "sha256-8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0="
     },
     "pdb": {
-      "Quisly.7pjizdu53z.pdb": "sha256-O6uij2rxL5dYilydEvQKyrIUIWynvr7WrqVD9cs4BiY="
+      "Quisly.ynyljmg2x7.pdb": "sha256-vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0="
     }
   },
   "cacheBootResources": true,
