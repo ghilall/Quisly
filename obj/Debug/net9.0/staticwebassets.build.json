@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "M7NrwImZRXOHUYo0oWXrshwh4lcjftuku6lH1pjoXY0=",
+  "Hash": "U/8QBKpoKwU8gd4L+Kxt1tf9PvmEfrueAcctAOhd7vU=",
   "Source": "Quisly",
   "BasePath": "/",
   "Mode": "Root",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "8725fzycfh",
-      "Integrity": "nGo5L+XJUHyva3BcvvT4rQefEzVkZDeP4bjZz9iEY7A=",
+      "Fingerprint": "bkz5f4pmmh",
+      "Integrity": "ta2UEEQj4QDIx705pGDuSIYuweYhudSLWIN0zcetots=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\blazor.boot.json"
@@ -1123,8 +1123,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "ynyljmg2x7",
-      "Integrity": "vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0=",
+      "Fingerprint": "p3z6vbj5p6",
+      "Integrity": "NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\Quisly.pdb"
@@ -1144,8 +1144,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "3bsvvcna9x",
-      "Integrity": "8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0=",
+      "Fingerprint": "ot17ze4n8d",
+      "Integrity": "BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\webcil\\Quisly.wasm"
@@ -6191,7 +6191,7 @@
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\9p819v1d6i-8725fzycfh.gz",
+      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\9p819v1d6i-bkz5f4pmmh.gz",
       "SourceId": "Quisly",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\",
@@ -6205,8 +6205,8 @@
       "RelatedAsset": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "xr23o9bgzc",
-      "Integrity": "zbyVKQyBNUt+n8/o+Zd0HrVyPwLGKVBwHVCMXvSyMWw=",
+      "Fingerprint": "3gambrew6x",
+      "Integrity": "Y/U9uUJNTD4Iw1dhMDIHInDkixlIs3ocx+PKqbkEzcw=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -6800,12 +6800,12 @@
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.JSInterop.WebAssembly.wasm"
     },
     {
-      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-yyudvnrrmm.gz",
+      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-bnmsjkt0w1.gz",
       "SourceId": "Quisly",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "css/app#[.{fingerprint=yyudvnrrmm}]?.css.gz",
+      "RelativePath": "css/app#[.{fingerprint=bnmsjkt0w1}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -6814,8 +6814,8 @@
       "RelatedAsset": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\css\\app.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "hjvwps6arf",
-      "Integrity": "Uw8+tFIZx4H9z1SV6Vn/9pHsvEM5/H93W2XDXwe3s2c=",
+      "Fingerprint": "y9w005vr9h",
+      "Integrity": "Zodmy8yjnGwKN6fQt3A22McQWeo2tu7fvthT/9W0+rM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\css\\app.css"
@@ -8984,12 +8984,12 @@
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Transactions.Local.wasm"
     },
     {
-      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-ynyljmg2x7.gz",
+      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-p3z6vbj5p6.gz",
       "SourceId": "Quisly",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/Quisly#[.{fingerprint=ynyljmg2x7}]!.pdb.gz",
+      "RelativePath": "_framework/Quisly#[.{fingerprint=p3z6vbj5p6}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -8998,8 +8998,8 @@
       "RelatedAsset": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Quisly.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "h15fnhhufv",
-      "Integrity": "u01MtZuo42fEX5l+8BhYEldpiTlmBEusalcGZTw1hNM=",
+      "Fingerprint": "clt7cgqffu",
+      "Integrity": "kL1nKxWj3+xghxl87IlaUCMImAogBh55f11ZfESYq+s=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Quisly.pdb"
@@ -10307,12 +10307,12 @@
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.IO.wasm"
     },
     {
-      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-3bsvvcna9x.gz",
+      "Identity": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-ot17ze4n8d.gz",
       "SourceId": "Quisly",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/Quisly#[.{fingerprint=3bsvvcna9x}]!.wasm.gz",
+      "RelativePath": "_framework/Quisly#[.{fingerprint=ot17ze4n8d}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -10321,8 +10321,8 @@
       "RelatedAsset": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Quisly.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "fuk9a6syg7",
-      "Integrity": "xzNN/prLYxI9cRgd1JaLMi04DjWYiVysNFsEtsfw9Wg=",
+      "Fingerprint": "dxv2kwxgh1",
+      "Integrity": "ITKhVu3hRH0DqoTx7d3zCk1kB0KhhWDzmV0Ol7//ots=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Quisly.wasm"
@@ -10909,8 +10909,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "yyudvnrrmm",
-      "Integrity": "9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo=",
+      "Fingerprint": "bnmsjkt0w1",
+      "Integrity": "WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\app.css"
@@ -11965,11 +11965,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"nGo5L+XJUHyva3BcvvT4rQefEzVkZDeP4bjZz9iEY7A=\""
+          "Value": "\"ta2UEEQj4QDIx705pGDuSIYuweYhudSLWIN0zcetots=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11979,18 +11979,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-nGo5L+XJUHyva3BcvvT4rQefEzVkZDeP4bjZz9iEY7A="
+          "Value": "sha256-ta2UEEQj4QDIx705pGDuSIYuweYhudSLWIN0zcetots="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\9p819v1d6i-8725fzycfh.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\9p819v1d6i-bkz5f4pmmh.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000072743144"
+          "Quality": "0.000072753729"
         }
       ],
       "ResponseHeaders": [
@@ -12000,15 +12000,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13746"
+          "Value": "13744"
         },
         {
           "Name": "ETag",
-          "Value": "\"zbyVKQyBNUt+n8/o+Zd0HrVyPwLGKVBwHVCMXvSyMWw=\""
+          "Value": "\"Y/U9uUJNTD4Iw1dhMDIHInDkixlIs3ocx+PKqbkEzcw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:32:25 GMT"
+          "Value": "Tue, 07 Apr 2026 18:04:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12028,19 +12028,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"nGo5L+XJUHyva3BcvvT4rQefEzVkZDeP4bjZz9iEY7A=\""
+          "Value": "W/\"ta2UEEQj4QDIx705pGDuSIYuweYhudSLWIN0zcetots=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-nGo5L+XJUHyva3BcvvT4rQefEzVkZDeP4bjZz9iEY7A="
+          "Value": "sha256-ta2UEEQj4QDIx705pGDuSIYuweYhudSLWIN0zcetots="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\9p819v1d6i-8725fzycfh.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\9p819v1d6i-bkz5f4pmmh.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -12049,7 +12049,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13746"
+          "Value": "13744"
         },
         {
           "Name": "Content-Type",
@@ -12057,11 +12057,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zbyVKQyBNUt+n8/o+Zd0HrVyPwLGKVBwHVCMXvSyMWw=\""
+          "Value": "\"Y/U9uUJNTD4Iw1dhMDIHInDkixlIs3ocx+PKqbkEzcw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:32:25 GMT"
+          "Value": "Tue, 07 Apr 2026 18:04:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12079,7 +12079,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zbyVKQyBNUt+n8/o+Zd0HrVyPwLGKVBwHVCMXvSyMWw="
+          "Value": "sha256-Y/U9uUJNTD4Iw1dhMDIHInDkixlIs3ocx+PKqbkEzcw="
         }
       ]
     },
@@ -27121,7 +27121,7 @@
       ]
     },
     {
-      "Route": "_framework/Quisly.3bsvvcna9x.wasm",
+      "Route": "_framework/Quisly.ot17ze4n8d.wasm",
       "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Quisly.wasm",
       "Selectors": [],
       "ResponseHeaders": [
@@ -27131,7 +27131,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "181525"
+          "Value": "184597"
         },
         {
           "Name": "Content-Type",
@@ -27139,11 +27139,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0=\""
+          "Value": "\"BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:40 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27153,7 +27153,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3bsvvcna9x"
+          "Value": "ot17ze4n8d"
         },
         {
           "Name": "label",
@@ -27161,18 +27161,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0="
+          "Value": "sha256-BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI="
         }
       ]
     },
     {
-      "Route": "_framework/Quisly.3bsvvcna9x.wasm",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-3bsvvcna9x.gz",
+      "Route": "_framework/Quisly.ot17ze4n8d.wasm",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-ot17ze4n8d.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000014729493"
+          "Quality": "0.000014499899"
         }
       ],
       "ResponseHeaders": [
@@ -27182,15 +27182,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "67890"
+          "Value": "68965"
         },
         {
           "Name": "ETag",
-          "Value": "\"xzNN/prLYxI9cRgd1JaLMi04DjWYiVysNFsEtsfw9Wg=\""
+          "Value": "\"ITKhVu3hRH0DqoTx7d3zCk1kB0KhhWDzmV0Ol7//ots=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27210,13 +27210,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0=\""
+          "Value": "W/\"BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3bsvvcna9x"
+          "Value": "ot17ze4n8d"
         },
         {
           "Name": "label",
@@ -27224,13 +27224,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0="
+          "Value": "sha256-BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI="
         }
       ]
     },
     {
-      "Route": "_framework/Quisly.3bsvvcna9x.wasm.gz",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-3bsvvcna9x.gz",
+      "Route": "_framework/Quisly.ot17ze4n8d.wasm.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-ot17ze4n8d.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -27239,7 +27239,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "67890"
+          "Value": "68965"
         },
         {
           "Name": "Content-Type",
@@ -27247,11 +27247,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"xzNN/prLYxI9cRgd1JaLMi04DjWYiVysNFsEtsfw9Wg=\""
+          "Value": "\"ITKhVu3hRH0DqoTx7d3zCk1kB0KhhWDzmV0Ol7//ots=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27269,7 +27269,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3bsvvcna9x"
+          "Value": "ot17ze4n8d"
         },
         {
           "Name": "label",
@@ -27277,7 +27277,168 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-xzNN/prLYxI9cRgd1JaLMi04DjWYiVysNFsEtsfw9Wg="
+          "Value": "sha256-ITKhVu3hRH0DqoTx7d3zCk1kB0KhhWDzmV0Ol7//ots="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Quisly.p3z6vbj5p6.pdb",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Quisly.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "107692"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 18:06:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "p3z6vbj5p6"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Quisly.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Quisly.p3z6vbj5p6.pdb",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-p3z6vbj5p6.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000012974712"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "77072"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kL1nKxWj3+xghxl87IlaUCMImAogBh55f11ZfESYq+s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "p3z6vbj5p6"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Quisly.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/Quisly.p3z6vbj5p6.pdb.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-p3z6vbj5p6.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "77072"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kL1nKxWj3+xghxl87IlaUCMImAogBh55f11ZfESYq+s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "p3z6vbj5p6"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/Quisly.pdb.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kL1nKxWj3+xghxl87IlaUCMImAogBh55f11ZfESYq+s="
         }
       ]
     },
@@ -27292,7 +27453,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "106460"
+          "Value": "107692"
         },
         {
           "Name": "Content-Type",
@@ -27300,11 +27461,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0=\""
+          "Value": "\"NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:40 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:35 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27314,18 +27475,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0="
+          "Value": "sha256-NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg="
         }
       ]
     },
     {
       "Route": "_framework/Quisly.pdb",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-ynyljmg2x7.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-p3z6vbj5p6.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000013105645"
+          "Quality": "0.000012974712"
         }
       ],
       "ResponseHeaders": [
@@ -27335,15 +27496,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "76302"
+          "Value": "77072"
         },
         {
           "Name": "ETag",
-          "Value": "\"u01MtZuo42fEX5l+8BhYEldpiTlmBEusalcGZTw1hNM=\""
+          "Value": "\"kL1nKxWj3+xghxl87IlaUCMImAogBh55f11ZfESYq+s=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27363,19 +27524,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0=\""
+          "Value": "W/\"NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0="
+          "Value": "sha256-NfJ6CDvInHk8S+Jnec/C9uUvGkT4rq/Oq1Zf1IACAIg="
         }
       ]
     },
     {
       "Route": "_framework/Quisly.pdb.gz",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-ynyljmg2x7.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-p3z6vbj5p6.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -27384,7 +27545,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "76302"
+          "Value": "77072"
         },
         {
           "Name": "Content-Type",
@@ -27392,11 +27553,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"u01MtZuo42fEX5l+8BhYEldpiTlmBEusalcGZTw1hNM=\""
+          "Value": "\"kL1nKxWj3+xghxl87IlaUCMImAogBh55f11ZfESYq+s=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27414,7 +27575,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-u01MtZuo42fEX5l+8BhYEldpiTlmBEusalcGZTw1hNM="
+          "Value": "sha256-kL1nKxWj3+xghxl87IlaUCMImAogBh55f11ZfESYq+s="
         }
       ]
     },
@@ -27429,7 +27590,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "181525"
+          "Value": "184597"
         },
         {
           "Name": "Content-Type",
@@ -27437,11 +27598,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0=\""
+          "Value": "\"BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:40 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:36 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27451,18 +27612,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0="
+          "Value": "sha256-BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI="
         }
       ]
     },
     {
       "Route": "_framework/Quisly.wasm",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-3bsvvcna9x.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-ot17ze4n8d.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000014729493"
+          "Quality": "0.000014499899"
         }
       ],
       "ResponseHeaders": [
@@ -27472,15 +27633,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "67890"
+          "Value": "68965"
         },
         {
           "Name": "ETag",
-          "Value": "\"xzNN/prLYxI9cRgd1JaLMi04DjWYiVysNFsEtsfw9Wg=\""
+          "Value": "\"ITKhVu3hRH0DqoTx7d3zCk1kB0KhhWDzmV0Ol7//ots=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27500,19 +27661,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0=\""
+          "Value": "W/\"BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8T/pnT5Abei+scbM2BMXvIKINZZWpGYsn4xOlKB7Nh0="
+          "Value": "sha256-BABVMPF/AQiHkiRhEgwhauLEyFY3lHOdO1D8gthI0nI="
         }
       ]
     },
     {
       "Route": "_framework/Quisly.wasm.gz",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-3bsvvcna9x.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\y9ynzqj58d-ot17ze4n8d.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -27521,7 +27682,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "67890"
+          "Value": "68965"
         },
         {
           "Name": "Content-Type",
@@ -27529,11 +27690,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"xzNN/prLYxI9cRgd1JaLMi04DjWYiVysNFsEtsfw9Wg=\""
+          "Value": "\"ITKhVu3hRH0DqoTx7d3zCk1kB0KhhWDzmV0Ol7//ots=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
+          "Value": "Tue, 07 Apr 2026 18:06:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -27551,168 +27712,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-xzNN/prLYxI9cRgd1JaLMi04DjWYiVysNFsEtsfw9Wg="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Quisly.ynyljmg2x7.pdb",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Quisly.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "106460"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:40 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ynyljmg2x7"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Quisly.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Quisly.ynyljmg2x7.pdb",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-ynyljmg2x7.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000013105645"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "76302"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"u01MtZuo42fEX5l+8BhYEldpiTlmBEusalcGZTw1hNM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ynyljmg2x7"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Quisly.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-vi27/ScT0IZvPvAsHZgp/gRHnnHcyYqJMQ1ODL8mov0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/Quisly.ynyljmg2x7.pdb.gz",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\oii6y3vcyv-ynyljmg2x7.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "76302"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"u01MtZuo42fEX5l+8BhYEldpiTlmBEusalcGZTw1hNM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:38:41 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ynyljmg2x7"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/Quisly.pdb.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-u01MtZuo42fEX5l+8BhYEldpiTlmBEusalcGZTw1hNM="
+          "Value": "sha256-ITKhVu3hRH0DqoTx7d3zCk1kB0KhhWDzmV0Ol7//ots="
         }
       ]
     },
@@ -80389,13 +80389,13 @@
       ]
     },
     {
-      "Route": "css/app.css",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-yyudvnrrmm.gz",
+      "Route": "css/app.bnmsjkt0w1.css",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-bnmsjkt0w1.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000140016802"
+          "Quality": "0.000138007176"
         }
       ],
       "ResponseHeaders": [
@@ -80405,19 +80405,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7141"
+          "Value": "7245"
         },
         {
           "Name": "ETag",
-          "Value": "\"Uw8+tFIZx4H9z1SV6Vn/9pHsvEM5/H93W2XDXwe3s2c=\""
+          "Value": "\"Zodmy8yjnGwKN6fQt3A22McQWeo2tu7fvthT/9W0+rM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:18:06 GMT"
+          "Value": "Tue, 07 Apr 2026 18:03:10 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -80433,18 +80433,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo=\""
+          "Value": "W/\"WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "bnmsjkt0w1"
+        },
+        {
+          "Name": "label",
+          "Value": "css/app.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo="
+          "Value": "sha256-WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8="
         }
       ]
     },
     {
-      "Route": "css/app.css",
+      "Route": "css/app.bnmsjkt0w1.css",
       "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -80454,7 +80462,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "41477"
+          "Value": "42049"
         },
         {
           "Name": "Content-Type",
@@ -80462,121 +80470,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo=\""
+          "Value": "\"WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:18:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo="
-        }
-      ]
-    },
-    {
-      "Route": "css/app.css.gz",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-yyudvnrrmm.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "7141"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Uw8+tFIZx4H9z1SV6Vn/9pHsvEM5/H93W2XDXwe3s2c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:18:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-Uw8+tFIZx4H9z1SV6Vn/9pHsvEM5/H93W2XDXwe3s2c="
-        }
-      ]
-    },
-    {
-      "Route": "css/app.yyudvnrrmm.css",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-yyudvnrrmm.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000140016802"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "7141"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Uw8+tFIZx4H9z1SV6Vn/9pHsvEM5/H93W2XDXwe3s2c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:18:06 GMT"
+          "Value": "Tue, 07 Apr 2026 18:03:10 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "yyudvnrrmm"
+          "Value": "bnmsjkt0w1"
         },
         {
           "Name": "label",
@@ -80584,13 +80492,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo="
+          "Value": "sha256-WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8="
         }
       ]
     },
     {
-      "Route": "css/app.yyudvnrrmm.css",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\css\\app.css",
+      "Route": "css/app.bnmsjkt0w1.css.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-bnmsjkt0w1.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80599,7 +80507,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "41477"
+          "Value": "7245"
         },
         {
           "Name": "Content-Type",
@@ -80607,56 +80515,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo=\""
+          "Value": "\"Zodmy8yjnGwKN6fQt3A22McQWeo2tu7fvthT/9W0+rM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:18:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "yyudvnrrmm"
-        },
-        {
-          "Name": "label",
-          "Value": "css/app.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-9nZBoJl2j6iDKvDoL4NPjJAXNVZLxJo+yfaZSZ1xaIo="
-        }
-      ]
-    },
-    {
-      "Route": "css/app.yyudvnrrmm.css.gz",
-      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-yyudvnrrmm.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "7141"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Uw8+tFIZx4H9z1SV6Vn/9pHsvEM5/H93W2XDXwe3s2c=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 07 Apr 2026 17:18:06 GMT"
+          "Value": "Tue, 07 Apr 2026 18:03:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -80674,7 +80537,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "yyudvnrrmm"
+          "Value": "bnmsjkt0w1"
         },
         {
           "Name": "label",
@@ -80682,7 +80545,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Uw8+tFIZx4H9z1SV6Vn/9pHsvEM5/H93W2XDXwe3s2c="
+          "Value": "sha256-Zodmy8yjnGwKN6fQt3A22McQWeo2tu7fvthT/9W0+rM="
+        }
+      ]
+    },
+    {
+      "Route": "css/app.css",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-bnmsjkt0w1.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000138007176"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7245"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zodmy8yjnGwKN6fQt3A22McQWeo2tu7fvthT/9W0+rM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 18:03:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8="
+        }
+      ]
+    },
+    {
+      "Route": "css/app.css",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\wwwroot\\css\\app.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "42049"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 18:03:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WQuXgdRUxlCz2+m6JrqfwCiv7YxqBWSboMvq/vk6YM8="
+        }
+      ]
+    },
+    {
+      "Route": "css/app.css.gz",
+      "AssetFile": "C:\\Users\\Gokce\\Desktop\\Quisly\\obj\\Debug\\net9.0\\compressed\\ciw3sa1sb7-bnmsjkt0w1.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7245"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Zodmy8yjnGwKN6fQt3A22McQWeo2tu7fvthT/9W0+rM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 07 Apr 2026 18:03:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Zodmy8yjnGwKN6fQt3A22McQWeo2tu7fvthT/9W0+rM="
         }
       ]
     },

@@ -44,6 +44,7 @@
     private string _error = "";
     private string _info = "";
     private bool _loading;
+    private string? _returnUrl;
 
     protected override void OnInitialized()
     {
@@ -52,6 +53,10 @@
         if (query.ContainsKey("confirm"))
         {
             _info = "Account created! Please check your mailbox and confirm your email before signing in.";
+        }
+        if (query.TryGetValue("returnUrl", out var returnUrl) && !string.IsNullOrWhiteSpace(returnUrl))
+        {
+            _returnUrl = returnUrl.ToString();
         }
     }
 
@@ -63,7 +68,7 @@
         try
         {
             await Auth.SignIn(_email, _password);
-            Nav.NavigateTo("/");
+            Nav.NavigateTo(string.IsNullOrWhiteSpace(_returnUrl) ? "/" : _returnUrl!);
         }
         catch (Exception ex)
         {

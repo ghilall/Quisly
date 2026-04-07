@@ -10,6 +10,7 @@
 @inject NavigationManager Nav
 
 <div class="play-game-page">
+    <button class="btn-icon back-button" title="Leave game" @onclick="LeaveGame">←</button>
     @if (_loading)
     {
         <div class="waiting-phase">
@@ -358,5 +359,19 @@
         _pollCts?.Dispose();
         await Realtime.UnsubscribeAll();
         _selfRef?.Dispose();
+    }
+
+    private async Task LeaveGame()
+    {
+        try
+        {
+            await Game.RemovePlayer(PlayerId);
+        }
+        catch
+        {
+            // best-effort
+        }
+
+        Nav.NavigateTo("/");
     }
 }

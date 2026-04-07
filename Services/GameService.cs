@@ -124,6 +124,15 @@ public class GameService
         return player;
     }
 
+    public async Task RemovePlayer(string playerId)
+    {
+        // Supabase.Postgrest supports delete via query.
+        await _supabase.Client
+            .From<Player>()
+            .Where(p => p.Id == playerId)
+            .Delete();
+    }
+
     public async Task UpdatePlayerNickname(string playerId, string nickname)
     {
         var player = await _supabase.Client

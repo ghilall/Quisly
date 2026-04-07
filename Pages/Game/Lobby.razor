@@ -11,6 +11,7 @@
 
 <div class="lobby-page">
     <div class="lobby-header">
+        <button class="btn-icon back-button" title="Leave lobby" @onclick="LeaveLobby">←</button>
         <h1 class="brand-title">Quisly</h1>
         <p class="lobby-subtitle">Waiting for players to join...</p>
     </div>
@@ -19,7 +20,6 @@
         <div class="lobby-join-info">
             <PinDisplay Pin="@_pin" />
             <QRCodeDisplay JoinUrl="@JoinUrl" />
-            <p class="join-url">@JoinUrl</p>
         </div>
 
         <div class="lobby-players">
@@ -210,6 +210,17 @@
     {
         await Game.UpdateSessionStatus(SessionId, SessionStatus.ShowingQuestion, 0);
         Nav.NavigateTo($"/host-game/{SessionId}");
+    }
+
+    private async Task LeaveLobby()
+    {
+        // If host is also a player, remove them from the players list on leave.
+        if (_hostPlayerId != null)
+        {
+            try { await Game.RemovePlayer(_hostPlayerId); } catch { }
+        }
+
+        Nav.NavigateTo("/");
     }
 
     public async ValueTask DisposeAsync()

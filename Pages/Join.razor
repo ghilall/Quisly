@@ -15,7 +15,7 @@
         {
             <div class="auth-required">
                 <p>You need to sign in to join a game.</p>
-                <button class="btn-primary" @onclick='() => Nav.NavigateTo("/login")'>Sign In</button>
+                <button class="btn-primary" @onclick="GoToLogin">Sign In</button>
             </div>
         }
         else if (!string.IsNullOrEmpty(_error))
@@ -72,6 +72,13 @@
         if (!string.IsNullOrEmpty(PinParam))
             _pin = PinParam;
 
+        // If user arrived via QR (/join/{pin}) while logged out, redirect to login and then back here.
+        if (!Auth.IsAuthenticated && !string.IsNullOrEmpty(PinParam))
+        {
+            GoToLogin();
+            return;
+        }
+
         // Default nickname = account username, but user can edit it.
         if (Auth.IsAuthenticated)
         {
@@ -79,6 +86,13 @@
             if (!string.IsNullOrWhiteSpace(profile?.Username))
                 _nickname = profile!.Username;
         }
+    }
+
+    private void GoToLogin()
+    {
+        var returnUrl = $"/join/{_pin}";
+        var encoded = Uri.EscapeDataString(returnUrl);
+        Nav.NavigateTo($"/login?returnUrl={encoded}");
     }
 
     private async Task HandleJoin()
